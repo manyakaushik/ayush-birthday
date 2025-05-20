@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayush's Grievance Portal</title>
+  <style>
+    body {
+      background-color: #fff0f3;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 60px 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d6336c;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-weight: normal;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffe6ec;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 5px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    select, textarea, input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #ff6f91;
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e85a7d;
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { bottom: -50px; transform: translateX(0) rotate(45deg); }
+      100% { bottom: 100%; transform: translateX(-100px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ayush’s Official Grievance Redressal Portal 📝</h1>
+  <h3>If you are mildly offended, deeply neglected, or dramatically under-kissed — submit below.</h3>
+
+  <form action="https://script.google.com/macros/s/AKfycbzH2hU-Jvm3ndBcXRZsoEzeMU99fN3D4k5O1J3F3Qrc3oytXTHeSe3l3h7Cas886l8Y/exec" method="POST">
+    <label>Your Name</label>
+    <input type="text" name="name" value="Ayush 😤" readonly />
+
+    <label>Type of Grievance</label>
+    <select name="type" required>
+      <option selected disabled>Choose your grievance</option>
+      <option>She left me on read for 7+ minutes</option>
+      <option>She liked a couples reel but didn’t send it to me</option>
+      <option>She did not video call me today</option>
+      <option>She fell asleep mid-call</option>
+      <option>She saw my Wordle and didn’t praise me</option>
+      <option>She watched an episode without me</option>
+      <option>She didn’t laugh at my “fire” joke</option>
+      <option>She said “hmmm” and I spiraled</option>
+      <option>She hasn't called me baby since 3+ hours</option>
+      <option>She did not send me her picture today</option>
+      <option>She missed our online movie date</option>
+      <option>She didn’t let me win the debate on purpose</option>
+      <option>She was busy with “life” instead of me</option>
+      <option>She made me wait 0.4 seconds too long</option>
+      <option>She exists and it’s not fair to others</option>
+      <option>She has been distant and it's worrying me</option>
+      <option>She hasn't sent our hot videos</option>
+      <option>Other – I’ll type it below</option>
+    </select>
+
+    <label>Describe the Situation</label>
+    <textarea name="details" rows="4" placeholder="Include timestamps and dramatic feelings..." required></textarea>
+
+    <button type="submit">Submit Complaint</button>
+  </form>
+
+  <!-- Floating hearts -->
+  <script>
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 2 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayush's Grievance Portal</title>
+  <style>
+    body {
+      background-color: #fff0f3;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 60px 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d6336c;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-weight: normal;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffe6ec;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 5px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    select, textarea, input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #ff6f91;
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #e85a7d;
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 8s infinite;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% { bottom: -50px; transform: translateX(0) rotate(45deg); }
+      100% { bottom: 100%; transform: translateX(-100px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ayush’s Official Grievance Redressal Portal 📝</h1>
+  <h3>If you are mildly offended, deeply neglected, or dramatically under-kissed — submit below.</h3>
+
+  <form action="https://script.google.com/macros/s/AKfycbzH2hU-Jvm3ndBcXRZsoEzeMU99fN3D4k5O1J3F3Qrc3oytXTHeSe3l3h7Cas886l8Y/exec" method="POST">
+    <label>Your Name</label>
+    <input type="text" name="name" value="Ayush 😤" readonly />
+
+    <label>Type of Grievance</label>
+    <select name="type" required>
+      <option selected disabled>Choose your grievance</option>
+      <option>She left me on read for 7+ minutes</option>
+      <option>She liked a couples reel but didn’t send it to me</option>
+      <option>She did not video call me today</option>
+      <option>She fell asleep mid-call</option>
+      <option>She saw my Wordle and didn’t praise me</option>
+      <option>She watched an episode without me</option>
+      <option>She didn’t laugh at my “fire” joke</option>
+      <option>She said “hmmm” and I spiraled</option>
+      <option>She hasn't called me baby since 3+ hours</option>
+      <option>She did not send me her picture today</option>
+      <option>She missed our online movie date</option>
+      <option>She didn’t let me win the debate on purpose</option>
+      <option>She was busy with “life” instead of me</option>
+      <option>She made me wait 0.4 seconds too long</option>
+      <option>She exists and it’s not fair to others</option>
+      <option>She has been distant and it's worrying me</option>
+      <option>She hasn't sent our hot videos</option>
+      <option>Other – I’ll type it below</option>
+    </select>
+
+    <label>Describe the Situation</label>
+    <textarea name="details" rows="4" placeholder="Include timestamps and dramatic feelings..." required></textarea>
+
+    <button type="submit">Submit Complaint</button>
+  </form>
+
+  <!-- Floating hearts -->
+  <script>
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 2 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
+  </script>
+
+</body>
+</html>

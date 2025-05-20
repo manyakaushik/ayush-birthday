@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayush Complaint Dashboard</title>
+  <style>
+    body {
+      background: #fff9fb;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #d6336c;
+      font-size: 2.5em;
+    }
+
+    #password-section {
+      margin-top: 50px;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      background-color: #ff6f91;
+      border: none;
+      color: white;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      margin-top: 40px;
+      border: 2px solid #ffccd5;
+      border-radius: 8px;
+    }
+
+    #error {
+      color: #cc0000;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ayush’s Secret Grievance Dashboard 💌</h1>
+
+  <div id="password-section">
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkPassword()">Enter</button>
+    <div id="error"></div>
+  </div>
+
+  <div id="iframe-container" style="display:none;">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5OOqZUkIrTdH2TuI9cqFmWZQvM4qqTcDKK-lrebYplZrci5-90jmToqrl7Df6cH-sxE9hARJQUZNc/pubhtml?widget=true&amp;headers=false"></iframe>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const correctPassword = "allmytomorrows"; // Change this to anything you want
+      const entered = document.getElementById("password").value;
+      if (entered === correctPassword) {
+        document.getElementById("password-section").style.display = "none";
+        document.getElementById("iframe-container").style.display = "block";
+      } else {
+        document.getElementById("error").innerText = "Nope, that’s not it 😤";
+      }
+    }
+  </script>
+
+</body>
+</html>

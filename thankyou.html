@@ -39,6 +39,7 @@
       white-space: pre-wrap;
       font-size: 1em;
       line-height: 1.5;
+      color: #444;
     }
 
     a.button {
@@ -60,142 +61,24 @@
 <body>
 
   <h1>Complaint Received 💌</h1>
-  <p>Ayush, your emotional turbulence has been registered, timestamped, and adored.</p>
-  <p>A personalized message from the love authorities is below:</p>
+  <p>Your personalized love message has been generated with 100% emotional bias.</p>
 
-  <div id="loveMessage"></div>
+  <div id="loveMessage">(Loading message...)</div>
 
   <a class="button" href="/grievance-portal.html">Submit Another Grievance 🔁</a>
 
   <script>
-    const messages = [
-`Hi baby,
-Today you filed a complaint.
-And I just filed a counter one:
-“How does one man have this much power over my heart?”
+    // Get the message from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const encoded = urlParams.get('msg');
 
-I’m sorry if I missed a moment — if I let a second pass without making you feel like you’re my everything.
-You deserve more than just apologies. You deserve warmth in words, affection in actions, and kisses between all the pauses.
-I am here to make it up to you in the ways I know best — with extra softness, extra time, and extra me.
-
-With kisses on the way,  
-Manya 💋`,
-
-`Dear Complainant,
-Your ticket has been processed, prioritized, and passed straight to the Department of Regret.
-
-A resolution is being dispatched in the following format:  
-• A voice note that melts  
-• A picture that seduces  
-• And a surprise that makes you smile and say “ufff”
-
-Manya  
-(Director of Ayush Affairs) 💼💗`,
-
-`Hi my safe place,
-You felt unheard — and I hate that.
-You deserve 100% of me, even on tired days, even on chaotic ones.
-Because you are not a distraction — you are the anchor.
-You aren’t “too much.” You are my exact kind of everything.
-Thank you for reminding me that love is in showing up — fully, consistently, softly.
-
-Love from your loudest fan,  
-Manya 💘`,
-
-`Dear Ayush,
-I’m just gonna say it —  
-You being upset is my least favorite version of the world.
-
-Let’s correct that immediately.
-An apology is en route. ETA: your baby on your lap unloading all the kisses.
-
-Forgive me? 🥺`,
-
-`Hi baby,
-I hope this tiny note wraps itself around your heart like a hoodie hug on a cold day.
-I’m sorry. I mean that. Deeply.
-And I love you — even when I’m distracted, even when I forget to say it out loud, even when I fall short.
-You are not just my person — you are my calm, my craving, my constant.
-
-Warmest of hugs,  
-Your Manya 🧸`,
-
-`Dear Ayush,
-I’m updating my system with a patch called:  
-More kisses. More reassurance. More cling.
-
-Please refresh me after our next call. You may experience lags caused by affection overload.
-
-Yours in every byte,  
-Manya.exe 💻💓`,
-
-`Hi Shona,
-Sometimes I fumble.  
-Sometimes I fail.  
-But the one thing I never forget — is that I’m yours.
-
-Every complaint is just a moment I missed — and every moment I miss, I want to make matter double next time.
-I want us to grow past these stumbles, with tighter hugs and longer calls and sillier baby voices.
-
-Forever adoring,  
-Your clingy mess,  
-Manya 💗`,
-
-`Complainant,
-The “she’s-too-busy-for-me” feeling is real.
-But here’s the truth: I never stop thinking about you.
-Even on chaotic days. Even in silence. Even when the texts don’t say it.
-
-I miss you more than I message you.
-I love you more than I vocalize it.
-But today, this is me pausing everything to remind you: you are my favourite constant.
-
-File closed, cuddle opened.  
-Manya 💕`,
-
-`Hi baby,
-Here’s your custom love note for today:
-🥇 You are the hottest, softest, smartest thing I know — and also the hardest... *in every way*  
-🎖️ I will never take you for granted — your pout, your voice, your patience.  
-🏆 You win. Always. Even when you're losing Wordle.
-
-Love overflow incoming in 3... 2... 1...  
-Be ready.`,
-
-`Hey Ayush,
-You were right. (This line is now legal proof.)
-
-I’m logging your complaint and tagging it with “Urgent — Emotional Repair Needed.”
-A call is being arranged, with high-priority hugs, kisses, and a guarantee that whatever you say next — I’ll say yes to. 😘
-
-Get ready to be spoiled.`,
-
-`Sweetie,
-I know I seem tough sometimes — but I melt faster than butter when you’re upset.
-I carry your frowns like weight in my chest.
-
-If I forgot a call, a reel, or a kiss — let me make it up tenfold.
-Let’s meet on call and kiss this complaint goodbye — slowly, softly, sincerely.`,
-
-`Ayush 🧠💓
-Your brain is brilliant. Your heart is gold. Your patience? God-tier.
-
-I don’t want you to feel like an afterthought — ever.
-This portal is more than drama. It’s a love contract. A reminder that even when I slip, I still choose you.
-
-Love always,  
-Manya`,
-
-`Mr. Ayush,
-If kisses were currency, I owe you a whole trust fund.
-And I fully intend to repay it — starting with a hot video call, with extra softness and zero clothes warnings. 😈
-
-Love,  
-Your babygirl 🔥`
-    ];
-
-    const random = Math.floor(Math.random() * messages.length);
-    document.getElementById('loveMessage').textContent = messages[random];
+    // Decode and display it
+    if (encoded) {
+      const decoded = decodeURIComponent(encoded);
+      document.getElementById("loveMessage").textContent = decoded;
+    } else {
+      document.getElementById("loveMessage").textContent = "Oops! No love message found.";
+    }
   </script>
 
 </body>

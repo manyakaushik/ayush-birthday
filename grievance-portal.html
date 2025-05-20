@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grievance Portal</title>
+  <style>
+    body {
+      background-color: #fff0f3;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 50px;
+      text-align: center;
+    }
+    h1 {
+      color: #d6336c;
+      font-size: 2.5em;
+    }
+    label, select, input, textarea {
+      display: block;
+      margin: 10px auto;
+      font-size: 1em;
+      width: 300px;
+      max-width: 90%;
+    }
+    button {
+      background-color: #ff6f91;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #response {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Grievance Portal 📝</h1>
+  <p>If you're Ayush and mildly offended, you're in the right place.</p>
+
+  <form id="grievanceForm">
+    <label>Your Name</label>
+    <input type="text" value="Ayush 😤" disabled />
+
+    <label>Type of Grievance</label>
+    <select>
+      <option>She ignored my meme</option>
+      <option>She made fun of my playlist</option>
+      <option>She was too pretty and it hurt</option>
+      <option>She replied after 4 minutes</option>
+    </select>
+
+    <label>Describe the situation</label>
+    <textarea rows="4" placeholder="Include timestamps and dramatic feelings..."></textarea>
+
+    <button type="submit">Submit Complaint</button>
+  </form>
+
+  <div id="response"></div>
+
+  <script>
+    document.getElementById('grievanceForm').onsubmit = function(e) {
+      e.preventDefault();
+      const responses = [
+        "Case noted. You’ll be compensated with unlimited cuddles 🐻",
+        "A formal apology + a forehead kiss 💋 will be issued within 2 hours.",
+        "Reprimand issued to Starbeam. She's being cute in detention.",
+        "Valid complaint. She owes you a date night now 🌙"
+      ];
+      const reply = responses[Math.floor(Math.random() * responses.length)];
+      document.getElementById('response').innerHTML = reply;
+    }
+  </script>
+
+</body>
+</html>

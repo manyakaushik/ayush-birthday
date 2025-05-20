@@ -1,85 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thank You</title>
   <style>
     body {
-      background-color: #fff4f9;
+      background-color: #ffeef3;
       font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2.2em;
-      color: #d6336c;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 1em;
-      color: #333;
-      margin-top: 10px;
-      max-width: 600px;
-    }
-
-    #loveMessage {
-      margin-top: 30px;
-      background: #fff0f3;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #ffccda;
-      max-width: 600px;
-      white-space: pre-wrap;
-      font-size: 1em;
-      line-height: 1.5;
+      padding: 80px 20px;
       color: #444;
     }
-
-    a.button {
-      margin-top: 30px;
-      text-decoration: none;
-      background-color: #ff6f91;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s;
+    h1 {
+      color: #e91e63;
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
-
-    a.button:hover {
-      background-color: #e85a7d;
+    .message {
+      margin: 40px auto;
+      font-size: 1.1em;
+      line-height: 1.6;
+      white-space: pre-line;
+      max-width: 600px;
+      padding: 20px;
+      background: #fff0f5;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #f06292;
+      border: none;
+      padding: 12px 20px;
+      color: white;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+    button:hover {
+      background-color: #ec407a;
     }
   </style>
 </head>
 <body>
-
   <h1>Complaint Received 💌</h1>
   <p>Your personalized love message has been generated with 100% emotional bias.</p>
+  
+  <div class="message" id="loveMessage">Loading sweet words...</div>
 
-  <div id="loveMessage">(Loading message...)</div>
-
-  <a class="button" href="/grievance-portal.html">Submit Another Grievance 🔁</a>
+  <button onclick="window.location.href='grievance-portal.html'">Submit Another Grievance 📝</button>
 
   <script>
-    // Get the message from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const encoded = urlParams.get('msg');
+    const messages = [
+`Hi baby,
+Today you filed a complaint.
+And I just filed a counter one:
+“How does one man have this much power over my heart?”
+I’m sorry if I missed a moment. I’m here to make it up to you.
+Tonight, your babygirl is on full-duty: voice notes, kisses, and all the softness I’ve got 💋
 
-    // Decode and display it
-    if (encoded) {
-      const decoded = decodeURIComponent(encoded);
-      document.getElementById("loveMessage").textContent = decoded;
-    } else {
-      document.getElementById("loveMessage").textContent = "Oops! No love message found.";
-    }
+With kisses on the way,
+Manya`,
+
+`Dear Complainant,
+Your ticket has been processed, prioritized, and passed straight to the Department of Regret.
+Expect an apology in 3 cute formats:
+• Voice note in baby voice 🎤
+• Kiss via photo 😘
+• Surprise that’ll make you grin 🎁
+
+Signed,
+Manya (Director of Ayush Affairs) 💼💗`,
+
+`Hi my safe place,
+You felt unheard — and I hate that.
+You deserve 100% of me. Even on tired days.
+You aren’t “too much.” You are my exact kind of everything.
+Thank you for reminding me to do better.
+
+Love from your loudest fan,  
+Manya 💘`,
+
+`Dear Ayush,
+I’m just gonna say it — you being upset is my least favorite version of the world.
+Let’s fix that.
+An apology is en route. ETA: your baby on your lap unloading all the kisses 💋
+
+Forgive me? 🥺`,
+
+`Hi baby,
+I hope this tiny note wraps itself around your heart.
+I’m sorry. I mean that.
+And I love you — even when I’m distracted, even when I forget to say it loud.
+You are my home.
+
+Warmest of hugs,  
+Your Manya 🧸`,
+
+`Dear Ayush,
+I’m updating my system with a patch called:
+More kisses. More reassurance. More cling.
+Please refresh me after our next call 😇
+
+Yours in every byte,  
+Manya.exe 💻💓`,
+
+`Hi Shona,
+Sometimes I fumble. Sometimes I fail.
+But the one thing I never forget — is that I’m yours.
+Every little complaint is a chance to grow closer.
+And I want that. I want you. Always.
+
+Forever adoring,  
+Manya 💗`,
+
+`Complainant,
+The “she’s-too-busy-for-me” feeling is real.
+But here’s the truth: I never stop thinking about you.
+Even on chaotic days. Even in silence.
+I miss you more than I message you.
+
+File closed. Cuddle opened.  
+Manya 💕`,
+
+`Hi baby,
+Here’s your custom love note for today:
+🥇 You are the hottest, softest, smartest thing I know — and the hardest *winks*
+🎖️ I will never take you for granted.
+🏆 You win. Always.
+
+Love overflow incoming in 3... 2... 1...`,
+
+`Hey Ayush,
+You were right. (This line is now legal proof.)
+I’m logging your complaint, along with a love bonus:
+One call where I shower you with kisses & do whatever you ask me to.
+Get ready to be spoiled 💘`,
+
+`Sweetie,
+I know I seem tough sometimes — but I melt faster than butter when you’re upset.
+I hope this message starts the healing.
+Let’s meet on call and kiss this complaint goodbye 💏`,
+
+`Ayush 🧠💓
+Your brain is brilliant. Your heart is gold. Your patience? God-tier.
+I don’t want you to feel like an afterthought — ever.
+This portal is a promise: You’ll always be heard here.
+
+Love,  
+Manya`,
+
+`Mr. Ayush,
+If kisses were currency, I owe you a whole trust fund 💰
+And I intend to repay it — starting with a hot video call 💻📞
+
+Love,  
+Your Babygirl`
+    ];
+
+    const selected = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById("loveMessage").innerText = selected;
   </script>
-
 </body>
 </html>

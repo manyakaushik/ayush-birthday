@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Thank You</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complaint Registered!</title>
   <style>
     body {
-      background-color: #fff4f9;
+      background-color: #fff0f5;
       font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       text-align: center;
-      padding: 20px;
+      padding: 80px 20px;
+      color: #d63384;
     }
 
     h1 {
       font-size: 2.5em;
-      color: #d6336c;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1.2em;
-      color: #333;
-      margin-top: 20px;
-      max-width: 500px;
+      margin: 10px 0;
     }
 
-    a {
-      margin-top: 30px;
-      text-decoration: none;
-      color: #ff6f91;
+    #responseLine {
       font-weight: bold;
-      font-size: 1.1em;
+      color: #ff69b4;
+      margin-top: 30px;
+      font-size: 1.4em;
+    }
+
+    .heart {
+      font-size: 2em;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
     }
   </style>
 </head>
 <body>
-  <h1>Thank You, My Love 💌</h1>
-  <p>Your grievance has been registered with the Department of Emotional Softness.  
-  A love response is on its way to your inbox — maybe with kisses, maybe with drama.</p>
-  <a href="/grievance-portal.html">File Another Complaint 🔁</a>
+  <h1>Complaint Received 💌</h1>
+  <p>Ayush, your voice has been heard — loud, clear, and adorable.</p>
+  <p>An email full of softness has been dispatched to you 📩</p>
+
+  <div id="responseLine" class="heart"></div>
+
+  <script>
+    const messages = [
+      "A forehead kiss will be delivered shortly 💋",
+      "You are now eligible for 1 video call cuddle 🧸",
+      "Case noted. Expect an overcompensating selfie soon 📸",
+      "Manya regrets the oversight. Love and compliments incoming ✨",
+      "You’ll receive your baby's video call in a few minutes ⏳",
+      "You deserve better. But also, she’s trying her best 🥺",
+      "Your complaint has melted her. Prepare for clinginess.",
+      "An emergency meme is being dispatched for emotional support 😂",
+      "Your ticket has triggered the ‘pyaar overload’ protocol. Brace yourself 💞",
+      "This is a certified boyfriend breakdown. Resolution: snacks and softness 🍫",
+      "Love agents are reviewing this case. Resolution ETA: kisses and a snuggle 🛌",
+      "Request approved. She’ll say ‘baby’ thrice in a row within the hour 🔁",
+      "You’ve unlocked the 'VIP boyfriend' tier. Rewards include 2 extra good morning hot selfies ☀️",
+      "Complaint validated. A midnight monologue about her feelings will follow 🌙",
+      "The delay has been registered. Next call will include moans and kisses 💆‍♀️",
+      "Her soul just whispered ‘sorry’. You probably felt it 👻❤️"
+    ];
+
+    const random = Math.floor(Math.random() * messages.length);
+    document.getElementById('responseLine').textContent = messages[random];
+  </script>
 </body>
 </html>

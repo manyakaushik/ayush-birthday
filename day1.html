@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wordle of Love – Day 1</title>
+  <style>
+    body {
+      background-color: #fff0f6;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      gap: 10px;
+      margin: 30px 0;
+    }
+
+    .tile {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ccc;
+      font-size: 2em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 60px;
+      background-color: white;
+    }
+
+    .tile.correct {
+      background-color: #6aaa64;
+      color: white;
+      border: none;
+    }
+
+    .tile.present {
+      background-color: #c9b458;
+      color: white;
+      border: none;
+    }
+
+    .tile.absent {
+      background-color: #787c7e;
+      color: white;
+      border: none;
+    }
+
+    input {
+      font-size: 1.2em;
+      padding: 10px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    button {
+      background-color: #ff66a3;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #message {
+      margin-top: 20px;
+      max-width: 500px;
+      font-size: 1em;
+      text-align: center;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Day 1: Wordle of Love 💌</h1>
+  <p>Guess the 5-letter word. You get 6 tries!</p>
+  <div class="board" id="board"></div>
+  <input type="text" id="guessInput" maxlength="5" placeholder="Type your guess" />
+  <button onclick="submitGuess()">Submit</button>
+  <div id="message"></div>
+
+  <script>
+    const answer = "BADDY";
+    const maxAttempts = 6;
+    let attempts = 0;
+
+    const board = document.getElementById('board');
+    const message = document.getElementById('message');
+    const input = document.getElementById('guessInput');
+
+    function createRow(guess) {
+      for (let i = 0; i < 5; i++) {
+        const tile = document.createElement('div');
+        tile.classList.add('tile');
+        tile.textContent = guess[i];
+
+        if (guess[i] === answer[i]) {
+          tile.classList.add('correct');
+        } else if (answer.includes(guess[i])) {
+          tile.classList.add('present');
+        } else {
+          tile.classList.add('absent');
+        }
+
+        board.appendChild(tile);
+      }
+    }
+
+    function submitGuess() {
+      const guess = input.value.toUpperCase();
+      if (guess.length !== 5) {
+        alert("Please enter a 5-letter word.");
+        return;
+      }
+
+      if (attempts >= maxAttempts) {
+        message.textContent = "No more attempts left! The word was " + answer;
+        return;
+      }
+
+      createRow(guess);
+      attempts++;
+      input.value = "";
+
+      if (guess === answer) {
+        message.innerHTML = "✅ You got it!<br>🔓 Letter Unlocked: <b>B</b><br><br>Your smashes on court? Sexy. But not as hard as I’ve fallen for you 🏸";
+      } else if (attempts === maxAttempts) {
+        message.textContent = "Out of attempts! The word was " + answer;
+      }
+    }
+  </script>
+</body>
+</html>

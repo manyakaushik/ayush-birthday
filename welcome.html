@@ -1,90 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome to the Wordle Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sacramento&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ayush’s 10-Day Birthday Countdown</title>
   <style>
     body {
-      background-color: #000;
-      color: #e6c200;
-      font-family: 'Playfair Display', serif;
-      text-align: center;
-      padding: 50px;
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #0c0c0c;
+      color: #f5d774;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
       position: relative;
     }
-    h1 {
-      font-size: 2.8em;
-      margin-bottom: 20px;
+
+    .container {
+      text-align: center;
+      max-width: 700px;
+      padding: 20px;
     }
-    .message {
-      font-size: 1.2em;
-      font-family: 'Sacramento', cursive;
-      max-width: 800px;
-      margin: 0 auto 40px auto;
-      line-height: 1.8;
+
+    .envelope {
+      width: 180px;
+      height: 130px;
+      margin: 0 auto 30px;
+      position: relative;
+      background: #f5d774;
+      border-radius: 5px;
+      transform: rotate(-2deg);
+      box-shadow: 0 0 30px rgba(255, 221, 84, 0.3);
+      animation: pop 1s ease-out forwards;
     }
-    .button {
-      background-color: #e6c200;
-      border: none;
-      padding: 12px 25px;
-      color: black;
-      font-size: 1em;
-      cursor: pointer;
-      border-radius: 8px;
+
+    @keyframes pop {
+      0% { transform: scale(0.7) rotate(-5deg); opacity: 0; }
+      100% { transform: scale(1) rotate(-2deg); opacity: 1; }
+    }
+
+    .letter {
+      background: #fff;
+      color: #000;
+      padding: 25px;
+      margin-top: -30px;
+      border-radius: 5px;
+      font-size: 1rem;
+      line-height: 1.5;
+      animation: fadein 2s ease-out;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .start-btn {
+      margin-top: 40px;
+      padding: 12px 30px;
+      background: #f5d774;
+      color: #0c0c0c;
       font-weight: bold;
-      transition: background 0.3s;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s ease;
     }
-    .button:hover {
-      background-color: #e6c200;
+
+    .start-btn:hover {
+      background: #e9c95e;
     }
-    .footer-note {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #888;
-    }
-    @keyframes float-up {
-      0% { transform: translateY(0); opacity: 0.6; }
-      100% { transform: translateY(-100vh); opacity: 0; }
-    }
-    .heart {
-      position: fixed;
+
+    .hearts {
+      position: absolute;
       bottom: 0;
-      font-size: 20px;
-      animation: float-up 6s ease-in infinite;
-      opacity: 0.6;
-      z-index: -1;
+      width: 100%;
+      height: 100px;
+      background: url('https://i.ibb.co/yYbsjqL/hearts-floating.gif') repeat-x;
+      background-size: contain;
+      animation: floatUp 20s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { background-position: 0 bottom; }
+      100% { background-position: 1000px bottom; }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Your Birthday Countdown, Dumdum 🎂</h1>
-  <div class="message">
-    Hey baby,<br><br>
-    It’s officially 10 days to your birthday — and my heart's already doing a happy dance.<br>
-    I’m so excited, I can barely wait to plan what you’ll wear, where we’ll go, how I’ll look at you like you hung the stars.<br><br>
-    But before we get there… I needed to make sure we spend some extra sweet time together — in our own silly, soft way.<br><br>
-    So here’s what I made:<br>
-    A 10-day Wordle countdown, just for your cutu brain and your smart bum.<br>
-    One little puzzle each day — unlocking one letter, one love note, one memory of us.<br><br>
-    So ready your fingers. Wake up that genius head.<br>
-    Let’s count down to you. 💛<br><br>
-    Forever yours,<br>
-    Manya
+  <div class="container">
+    <div class="envelope"></div>
+    <div class="letter">
+      <p><strong>Hey baby,</strong></p>
+      <p>It’s officially 10 days to your birthday — and my heart's already doing a happy dance. I’m so excited, I can barely wait to plan what you’ll wear, where we’ll go, how I’ll look at you like you hung the stars.</p>
+      <p>But before we get there… I needed to make sure we spend some extra sweet time together — in our own silly, soft way.</p>
+      <p>So here’s what I made: a 10-day Wordle countdown, just for your cutu brain and your smart bum. One little puzzle each day — unlocking one letter, one love note, one memory of us.</p>
+      <p>So ready your fingers. Wake up that genius head.</p>
+      <p><strong>Let’s count down to you. 💛</strong></p>
+      <p>Forever yours,<br>Manya</p>
+    </div>
+    <button class="start-btn" onclick="window.location.href='day1.html'">Start Wordle Day 1</button>
   </div>
-  <button class="button" onclick="window.location.href='day1.html'">Start Puzzle #1 💌</button>
-  <div class="footer-note">
-    P.S. Don't skip ahead to the final message yet. Just play along 😊
-  </div>
-  <script>
-    for (let i = 0; i < 15; i++) {
-      let heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '💛';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-      document.body.appendChild(heart);
-    }
-  </script>
+  <div class="hearts"></div>
 </body>
 </html>

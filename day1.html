@@ -1,25 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Wordle of Love – Day 1</title>
+  <meta charset="UTF-8">
+  <title>Day 1 - Wordle Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #fff0f6;
-      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0c0c;
+      color: #f9f9f9;
+      font-family: 'Open Sans', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-top: 40px;
     }
 
     h1 {
-      color: #d63384;
-      font-size: 2em;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      color: #ffd369;
       margin-bottom: 10px;
     }
 
-    .board {
+    #wordle-board {
       display: grid;
       grid-template-columns: repeat(5, 60px);
       gap: 10px;
@@ -29,115 +37,73 @@
     .tile {
       width: 60px;
       height: 60px;
-      border: 2px solid #ccc;
+      border: 2px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2em;
-      text-transform: uppercase;
+      font-weight: bold;
+      background-color: #1e1e1e;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    .correct {
+      background-color: #ffd369;
+      color: #000;
+    }
+
+    .present {
+      background-color: #444;
+      color: #ffd369;
+    }
+
+    .absent {
+      background-color: #2c2c2c;
+      color: #777;
+    }
+
+    .message {
+      max-width: 600px;
       text-align: center;
-      line-height: 60px;
-      background-color: white;
-    }
-
-    .tile.correct {
-      background-color: #6aaa64;
-      color: white;
-      border: none;
-    }
-
-    .tile.present {
-      background-color: #c9b458;
-      color: white;
-      border: none;
-    }
-
-    .tile.absent {
-      background-color: #787c7e;
-      color: white;
-      border: none;
-    }
-
-    input {
+      margin-top: 30px;
       font-size: 1.2em;
-      padding: 10px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
+      line-height: 1.6;
     }
 
-    button {
-      background-color: #ff66a3;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      font-size: 1em;
-      cursor: pointer;
-      border-radius: 5px;
+    .image {
+      margin-top: 30px;
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(255, 211, 105, 0.2);
     }
 
-    #message {
-      margin-top: 20px;
-      max-width: 500px;
-      font-size: 1em;
-      text-align: center;
-      white-space: pre-wrap;
+    .footer {
+      margin-top: 30px;
+      font-style: italic;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>Day 1: Wordle of Love 💌</h1>
-  <p>Guess the 5-letter word. You get 6 tries!</p>
-  <div class="board" id="board"></div>
-  <input type="text" id="guessInput" maxlength="5" placeholder="Type your guess" />
-  <button onclick="submitGuess()">Submit</button>
-  <div id="message"></div>
+  <h1>Day 1: Wordle Countdown</h1>
+  <div id="wordle-board">
+    <div class="tile correct">B</div>
+    <div class="tile absent">A</div>
+    <div class="tile absent">D</div>
+    <div class="tile absent">D</div>
+    <div class="tile absent">Y</div>
+  </div>
 
-  <script>
-    const answer = "BADDY";
-    const maxAttempts = 6;
-    let attempts = 0;
+  <div class="message">
+    <p>Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸<br><br>
+    As much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at: being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.<br><br>
+    As we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.</p>
+    <p>💛 And I can’t wait to scream-hug you when I see you.</p>
+  </div>
 
-    const board = document.getElementById('board');
-    const message = document.getElementById('message');
-    const input = document.getElementById('guessInput');
+  <img class="image" src="baddy.png" alt="Ghibli Baddy Image" />
 
-    function createRow(guess) {
-      for (let i = 0; i < 5; i++) {
-        const tile = document.createElement('div');
-        tile.classList.add('tile');
-        tile.textContent = guess[i];
-
-        if (guess[i] === answer[i]) {
-          tile.classList.add('correct');
-        } else if (answer.includes(guess[i])) {
-          tile.classList.add('present');
-        } else {
-          tile.classList.add('absent');
-        }
-
-        board.appendChild(tile);
-      }
-    }
-
-    function submitGuess() {
-      const guess = input.value.toUpperCase();
-      if (guess.length !== 5) {
-        alert("Please enter a 5-letter word.");
-        return;
-      }
-
-      if (attempts >= maxAttempts) {
-        message.textContent = "No more attempts left! The word was " + answer;
-        return;
-      }
-
-      createRow(guess);
-      attempts++;
-      input.value = "";
-
-      if (guess === answer) {
-        message.innerHTML = "✅ You got it!<br>🔓 Letter Unlocked: <b>B</b><br><br>Your smashes on court? Sexy. But not as hard as I’ve fallen for you 🏸";
-      } else if (attempts === maxAttempts) {
-        message.textContent = "Out of attempts! The word was " + answer;
-      }
-    }
-  </script>
+  <div class="footer">See you tomorrow, dumdum 💌</div>
 </body>
 </html>

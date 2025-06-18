@@ -1,29 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Day 1: Wordle Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #1d0e03;
-      color: #fff8ec;
-      font-family: 'Inter', sans-serif;
-      text-align: center;
-      padding: 40px 20px;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    h1 {
-      color: #f1c40f;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+    h2 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-top: 30px;
     }
 
-    .grid {
+    .board {
       display: grid;
       grid-template-columns: repeat(5, 60px);
-      gap: 10px;
+      grid-template-rows: repeat(6, 60px);
+      gap: 8px;
       justify-content: center;
       margin: 20px 0;
     }
@@ -31,158 +36,140 @@
     .tile {
       width: 60px;
       height: 60px;
-      background-color: #1f1f1f;
-      color: white;
+      border: 2px solid #444;
+      font-size: 28px;
+      font-weight: bold;
+      text-transform: uppercase;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background-color 0.4s ease;
+      background-color: #1e1e1e;
+      color: #fff;
     }
 
-    .correct {
+    .tile.correct {
       background-color: #6aaa64;
+      border-color: #6aaa64;
     }
 
-    .present {
+    .tile.present {
       background-color: #c9b458;
+      border-color: #c9b458;
     }
 
-    .absent {
+    .tile.absent {
       background-color: #3a3a3c;
+      border-color: #3a3a3c;
     }
 
-    input[type="text"] {
-      padding: 12px;
-      font-size: 1rem;
-      width: 300px;
-      border-radius: 6px;
+    .input-section {
+      margin: 20px 0;
+    }
+
+    #guess-input {
+      font-size: 18px;
+      padding: 8px 12px;
+      width: 220px;
+      border-radius: 5px;
       border: none;
-      text-transform: uppercase;
     }
 
     button {
-      margin-top: 12px;
-      padding: 10px 18px;
-      font-size: 1rem;
-      font-weight: bold;
-      background-color: #f1c40f;
+      margin-left: 10px;
+      padding: 8px 14px;
+      background-color: #ffcc00;
       border: none;
-      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
+      border-radius: 5px;
     }
 
-    .reveal {
-      margin-top: 30px;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
+    .reveal-section {
+      display: none;
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out forwards;
     }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+    .reveal-section.show {
+      display: block;
     }
 
-    .reveal img {
-      margin-top: 16px;
-      width: 300px;
+    .reveal-section img {
+      max-width: 100%;
+      margin-top: 20px;
       border-radius: 10px;
     }
 
-    .highlight {
-      color: #6aaa64;
-      font-weight: bold;
-    }
-
-    .note {
-      font-style: italic;
-      margin-top: 1rem;
-      color: #f7d37f;
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
+  <h2>Day 1: Wordle Countdown</h2>
+  <div id="board" class="board"></div>
 
-  <h1>Day 1: Wordle Countdown</h1>
+  <div class="input-section">
+    <input type="text" id="guess-input" maxlength="5" placeholder="Enter 5-letter word" />
+    <button onclick="submitGuess()">Submit</button>
+  </div>
 
-  <div id="grid" class="grid"></div>
-
-  <input id="guessInput" type="text" maxlength="5" placeholder="Enter 5-letter word"/>
-  <br/>
-  <button onclick="submitGuess()">Submit</button>
-
-  <div id="reveal" class="reveal" style="display:none;">
-    <h2 class="highlight">💚 B – Baddy</h2>
+  <div id="reveal" class="reveal-section">
+    <h3 style="color:#00ff99;">💚 B - Baddy</h3>
     <p>Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸</p>
     <p>As much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at: being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.</p>
     <p>As we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.</p>
-    <p>💛 And I can’t wait to scream-hug you when I see you.</p>
-    <p class="note">See you tomorrow, dumdum 💌</p>
-    <img src="baddy.png" alt="Day 1 Ghibli">
+    <p style="color:#ffcc00;">💛 And I can’t wait to scream-hug you when I see you.</p>
+    <p><em style="color:#ffcc99;">See you tomorrow, dumdum 💌</em></p>
+    <img src="baddy.png" alt="Baddy Art">
   </div>
 
   <script>
-    const solution = 'BADDY';
-    let attempts = [];
+    const solution = "baddy";
+    let currentRow = 0;
+    let board = [];
+
+    function createBoard() {
+      const boardEl = document.getElementById("board");
+      for (let i = 0; i < 30; i++) {
+        const tile = document.createElement("div");
+        tile.classList.add("tile");
+        boardEl.appendChild(tile);
+        board.push(tile);
+      }
+    }
 
     function submitGuess() {
-      const input = document.getElementById('guessInput');
-      const guess = input.value.toUpperCase();
+      const input = document.getElementById("guess-input");
+      const guess = input.value.toLowerCase();
+      if (guess.length !== 5) return alert("Please enter a 5-letter word");
 
-      if (guess.length !== 5) return;
-
-      attempts.push(guess);
-      renderGrid();
-
-      input.value = '';
+      for (let i = 0; i < 5; i++) {
+        const tile = board[currentRow * 5 + i];
+        tile.textContent = guess[i].toUpperCase();
+        if (guess[i] === solution[i]) {
+          tile.classList.add("correct");
+        } else if (solution.includes(guess[i])) {
+          tile.classList.add("present");
+        } else {
+          tile.classList.add("absent");
+        }
+      }
 
       if (guess === solution) {
-        document.body.style.backgroundColor = '#4b2c20';
-        setTimeout(() => {
-          document.getElementById('reveal').style.display = 'block';
-        }, 300);
+        document.body.style.backgroundColor = "#4d1f1f";
+        document.getElementById("reveal").classList.add("show");
       }
 
-      if (attempts.length >= 6) {
-        input.disabled = true;
-      }
+      currentRow++;
+      document.getElementById("guess-input").value = "";
     }
 
-    function renderGrid() {
-      const grid = document.getElementById('grid');
-      grid.innerHTML = '';
-
-      for (let word of attempts) {
-        for (let i = 0; i < 5; i++) {
-          const tile = document.createElement('div');
-          tile.classList.add('tile');
-          tile.textContent = word[i];
-
-          if (word[i] === solution[i]) {
-            tile.classList.add('correct');
-          } else if (solution.includes(word[i])) {
-            tile.classList.add('present');
-          } else {
-            tile.classList.add('absent');
-          }
-
-          grid.appendChild(tile);
-        }
-      }
-
-      // Render empty rows
-      const remainingRows = 6 - attempts.length;
-      for (let i = 0; i < remainingRows; i++) {
-        for (let j = 0; j < 5; j++) {
-          const tile = document.createElement('div');
-          tile.classList.add('tile');
-          grid.appendChild(tile);
-        }
-      }
-    }
+    window.onload = createBoard;
   </script>
 </body>
 </html>

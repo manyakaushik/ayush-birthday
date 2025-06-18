@@ -2,152 +2,187 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Day 1: Wordle Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day 1 · Wordle Countdown</title>
   <style>
     body {
-      background-color: #0d0d0d;
-      font-family: 'Inter', sans-serif;
-      color: #f8f1d9;
+      margin: 0;
+      background-color: #000;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: #fff;
+      transition: background-color 2s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #facc15;
+      font-size: 2em;
+      margin-top: 1em;
+    }
+
+    #game {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 40px 20px;
+      margin-top: 2em;
     }
-    h1 {
-      color: #ffd700;
-      margin-bottom: 10px;
-    }
-    #board {
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(5, 60px);
-      gap: 10px;
-      margin: 30px 0;
+      grid-template-columns: repeat(5, 3em);
+      gap: 0.5em;
     }
+
     .tile {
-      width: 60px;
-      height: 60px;
+      width: 3em;
+      height: 3em;
       border: 2px solid #444;
-      font-size: 24px;
-      font-weight: 600;
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      background-color: #1c1c1c;
-      color: white;
+      font-size: 1.5em;
+      background-color: #111;
+      color: #fff;
     }
-    .correct {
-      background-color: #6aaa64;
-    }
-    .present {
-      background-color: #c9b458;
-    }
-    .absent {
-      background-color: #3a3a3c;
-    }
-    #messageArea, #imageReveal {
-      display: none;
-      max-width: 500px;
+
+    .correct { background-color: #22c55e !important; }
+    .present { background-color: #eab308 !important; }
+    .absent { background-color: #333 !important; }
+
+    input {
+      margin-top: 1em;
+      font-size: 1.2em;
+      padding: 0.5em;
+      width: 160px;
       text-align: center;
-      margin-top: 40px;
     }
-    #wordInput {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      width: 120px;
-      text-transform: uppercase;
-    }
+
     button {
-      padding: 10px 16px;
-      margin-left: 10px;
-      background-color: #ffd700;
-      color: #0d0d0d;
-      border: none;
+      margin-top: 0.5em;
+      padding: 0.5em 1em;
+      background-color: #facc15;
+      color: black;
       font-weight: bold;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
     }
-    img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 20px;
+
+    .reveal {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 2s ease, max-height 2s ease;
+      text-align: center;
+      margin-top: 2em;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      max-height: 1000px;
+    }
+
+    .reveal img {
+      width: 300px;
+      margin: 1.5em auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #000;
+      animation: zoomIn 1.5s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .final-word {
+      font-size: 1.5em;
+      color: #22c55e;
+      margin-bottom: 0.5em;
+    }
+
+    .message p {
+      margin: 0.5em auto;
+      max-width: 600px;
+      line-height: 1.6;
+      color: #e5e5e5;
+    }
+
+    .message p:last-child {
+      font-style: italic;
+      margin-top: 1.2em;
+      color: #facc15;
     }
   </style>
 </head>
 <body>
-  <h1>Day 1: Wordle Countdown</h1>
-  <div id="board"></div>
-  <div id="wordInput">
-    <input type="text" id="guess" maxlength="5" />
-    <button onclick="submitGuess()">Submit</button>
-  </div>
-  <div id="messageArea">
-    <p><strong>💚 B - Baddy</strong></p>
-    <p>Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏋️<br>
-      As much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at:
-      being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.<br>
-      As we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.<br>
-      💛 And I can’t wait to scream-hug you when I see you.<br>
-      <br>
-      <em>See you tomorrow, dumdum 💌</em>
-    </p>
-  </div>
-  <div id="imageReveal">
-    <img src="baddy.png" alt="Baddy Ghibli Art" />
-  </div>
 
-  <script>
-    const correctWord = "BADDY";
-    const maxTries = 6;
-    let currentTry = 0;
+<h1>Day 1: Wordle Countdown</h1>
 
-    function createBoard() {
-      const board = document.getElementById("board");
-      for (let i = 0; i < maxTries * 5; i++) {
-        const tile = document.createElement("div");
-        tile.className = "tile";
-        board.appendChild(tile);
+<div id="game">
+  <div id="grid" class="grid"></div>
+  <input type="text" id="guess" maxlength="5" placeholder="Enter 5-letter word" />
+  <button onclick="submitGuess()">Submit</button>
+</div>
+
+<div id="reveal" class="reveal">
+  <div class="final-word">💚 B - Baddy</div>
+  <div class="message">
+    <p>Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸</p>
+    <p>As much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at: being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.</p>
+    <p>As we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.</p>
+    <p>💛 And I can’t wait to scream-hug you when I see you.</p>
+    <p><em>See you tomorrow, dumdum 💌</em></p>
+  </div>
+  <img src="baddy.png" alt="Baddy Ghibli"/>
+</div>
+
+<script>
+  const answer = "BADDY";
+  let currentRow = 0;
+
+  function createTileRow(guess = "") {
+    const grid = document.getElementById("grid");
+    for (let i = 0; i < 5; i++) {
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      tile.textContent = guess[i] || "";
+      grid.appendChild(tile);
+    }
+  }
+
+  createTileRow();
+
+  function submitGuess() {
+    const guessInput = document.getElementById("guess");
+    const guess = guessInput.value.toUpperCase();
+
+    if (guess.length !== 5) return;
+
+    const tiles = Array.from(document.getElementsByClassName("tile")).slice(currentRow * 5, (currentRow + 1) * 5);
+    for (let i = 0; i < 5; i++) {
+      tiles[i].textContent = guess[i];
+      if (guess[i] === answer[i]) {
+        tiles[i].classList.add("correct");
+      } else if (answer.includes(guess[i])) {
+        tiles[i].classList.add("present");
+      } else {
+        tiles[i].classList.add("absent");
       }
     }
 
-    function submitGuess() {
-      const guessInput = document.getElementById("guess");
-      const guess = guessInput.value.toUpperCase();
-      if (guess.length !== 5 || currentTry >= maxTries) return;
-
-      for (let i = 0; i < 5; i++) {
-        const tile = document.querySelectorAll(".tile")[currentTry * 5 + i];
-        tile.textContent = guess[i];
-        if (guess[i] === correctWord[i]) {
-          tile.classList.add("correct");
-        } else if (correctWord.includes(guess[i])) {
-          tile.classList.add("present");
-        } else {
-          tile.classList.add("absent");
-        }
-      }
-
-      currentTry++;
-      guessInput.value = "";
-
-      if (guess === correctWord) {
-        document.getElementById("wordInput").style.display = "none";
-        document.getElementById("messageArea").style.display = "block";
-        document.getElementById("imageReveal").style.display = "block";
-      } else if (currentTry >= maxTries) {
-        alert("Out of tries! The correct word was " + correctWord);
-      }
+    if (guess === answer) {
+      document.body.style.backgroundColor = "#451a03";
+      document.getElementById("reveal").classList.add("show");
+    } else {
+      currentRow++;
+      if (currentRow < 6) createTileRow();
     }
 
-    createBoard();
-  </script>
+    guessInput.value = "";
+  }
+</script>
+
 </body>
 </html>

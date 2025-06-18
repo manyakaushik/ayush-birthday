@@ -2,72 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Birthday Countdown Wordle</title>
+  <title>Welcome to the Wordle Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #000;
-      color: #ffd700;
-      font-family: 'Georgia', serif;
+      color: #e6c200;
+      font-family: 'Playfair Display', serif;
       text-align: center;
-      padding: 80px 20px;
+      padding: 50px;
+      position: relative;
     }
-
     h1 {
-      font-size: 3rem;
-      margin-bottom: 50px;
+      font-size: 2.8em;
+      margin-bottom: 20px;
     }
-
-    p {
-      font-size: 1.35rem;
-      line-height: 2.2rem;
+    .message {
+      font-size: 1.2em;
+      font-family: 'Sacramento', cursive;
       max-width: 800px;
-      margin: 20px auto;
+      margin: 0 auto 40px auto;
+      line-height: 1.8;
     }
-
-    .start-button {
-      background-color: #ffd700;
-      color: black;
-      padding: 14px 28px;
+    .button {
+      background-color: #e6c200;
       border: none;
-      border-radius: 8px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-top: 40px;
+      padding: 12px 25px;
+      color: black;
+      font-size: 1em;
       cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 0 15px #ffd700;
-      transition: transform 0.2s ease;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
     }
-
-    .start-button:hover {
-      transform: scale(1.05);
+    .button:hover {
+      background-color: #e6c200;
     }
-
-    .note {
-      font-size: 1rem;
-      color: #ccc;
-      margin-top: 40px;
-      font-style: italic;
+    .footer-note {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    @keyframes float-up {
+      0% { transform: translateY(0); opacity: 0.6; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    .heart {
+      position: fixed;
+      bottom: 0;
+      font-size: 20px;
+      animation: float-up 6s ease-in infinite;
+      opacity: 0.6;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
-
   <h1>Welcome to Your Birthday Countdown, Dumdum 🎂</h1>
-
-  <p>You’ve officially entered your birthday month countdown — and like every ridiculous romcom, this one comes with puzzles.</p>
-
-  <p>For the next 10 days, you’ll get one custom Wordle a day. Each one unlocks a love note, a letter, and a piece of something bigger.</p>
-
-  <p>Some words will be easy. Some might make you spiral. All of them? They’ll lead you home.</p>
-
-  <p>So stretch those fingers. Fire up that brain. And remember — I’m right here, loving you through every square. 🖤</p>
-
-  <p>With love always, <br><strong>Manya</strong></p>
-
-  <a class="start-button" href="day1.html">Start Puzzle #1 💌</a>
-
-  <p class="note">P.S. Don’t guess the final message yet. Just play along 😉</p>
-
+  <div class="message">
+    Hey baby,<br><br>
+    It’s officially 10 days to your birthday — and my heart's already doing a happy dance.<br>
+    I’m so excited, I can barely wait to plan what you’ll wear, where we’ll go, how I’ll look at you like you hung the stars.<br><br>
+    But before we get there… I needed to make sure we spend some extra sweet time together — in our own silly, soft way.<br><br>
+    So here’s what I made:<br>
+    A 10-day Wordle countdown, just for your cutu brain and your smart bum.<br>
+    One little puzzle each day — unlocking one letter, one love note, one memory of us.<br><br>
+    So ready your fingers. Wake up that genius head.<br>
+    Let’s count down to you. 💛<br><br>
+    Forever yours,<br>
+    Manya
+  </div>
+  <button class="button" onclick="window.location.href='day1.html'">Start Puzzle #1 💌</button>
+  <div class="footer-note">
+    P.S. Don't skip ahead to the final message yet. Just play along 😊
+  </div>
+  <script>
+    for (let i = 0; i < 15; i++) {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '💛';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
 </body>
 </html>

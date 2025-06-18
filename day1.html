@@ -3,186 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Day 1 · Wordle Countdown</title>
+  <title>Day 1: Wordle Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     body {
-      margin: 0;
-      background-color: #000;
-      font-family: 'Helvetica Neue', sans-serif;
-      color: #fff;
-      transition: background-color 2s ease;
+      background-color: #1d0e03;
+      color: #fff8ec;
+      font-family: 'Inter', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
     }
 
     h1 {
-      text-align: center;
-      color: #facc15;
-      font-size: 2em;
-      margin-top: 1em;
-    }
-
-    #game {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 2em;
+      color: #f1c40f;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(5, 3em);
-      gap: 0.5em;
+      grid-template-columns: repeat(5, 60px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
     }
 
     .tile {
-      width: 3em;
-      height: 3em;
-      border: 2px solid #444;
+      width: 60px;
+      height: 60px;
+      background-color: #1f1f1f;
+      color: white;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 1.5em;
-      background-color: #111;
-      color: #fff;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.4s ease;
     }
 
-    .correct { background-color: #22c55e !important; }
-    .present { background-color: #eab308 !important; }
-    .absent { background-color: #333 !important; }
+    .correct {
+      background-color: #6aaa64;
+    }
 
-    input {
-      margin-top: 1em;
-      font-size: 1.2em;
-      padding: 0.5em;
-      width: 160px;
-      text-align: center;
+    .present {
+      background-color: #c9b458;
+    }
+
+    .absent {
+      background-color: #3a3a3c;
+    }
+
+    input[type="text"] {
+      padding: 12px;
+      font-size: 1rem;
+      width: 300px;
+      border-radius: 6px;
+      border: none;
+      text-transform: uppercase;
     }
 
     button {
-      margin-top: 0.5em;
-      padding: 0.5em 1em;
-      background-color: #facc15;
-      color: black;
+      margin-top: 12px;
+      padding: 10px 18px;
+      font-size: 1rem;
       font-weight: bold;
+      background-color: #f1c40f;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
     }
 
     .reveal {
+      margin-top: 30px;
       opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 2s ease, max-height 2s ease;
-      text-align: center;
-      margin-top: 2em;
+      animation: fadeIn 1s ease forwards;
     }
 
-    .reveal.show {
-      opacity: 1;
-      max-height: 1000px;
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     .reveal img {
+      margin-top: 16px;
       width: 300px;
-      margin: 1.5em auto;
-      display: block;
-      border-radius: 12px;
-      box-shadow: 0 0 15px #000;
-      animation: zoomIn 1.5s ease forwards;
+      border-radius: 10px;
     }
 
-    @keyframes zoomIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .highlight {
+      color: #6aaa64;
+      font-weight: bold;
     }
 
-    .final-word {
-      font-size: 1.5em;
-      color: #22c55e;
-      margin-bottom: 0.5em;
-    }
-
-    .message p {
-      margin: 0.5em auto;
-      max-width: 600px;
-      line-height: 1.6;
-      color: #e5e5e5;
-    }
-
-    .message p:last-child {
+    .note {
       font-style: italic;
-      margin-top: 1.2em;
-      color: #facc15;
+      margin-top: 1rem;
+      color: #f7d37f;
     }
   </style>
 </head>
 <body>
 
-<h1>Day 1: Wordle Countdown</h1>
+  <h1>Day 1: Wordle Countdown</h1>
 
-<div id="game">
   <div id="grid" class="grid"></div>
-  <input type="text" id="guess" maxlength="5" placeholder="Enter 5-letter word" />
-  <button onclick="submitGuess()">Submit</button>
-</div>
 
-<div id="reveal" class="reveal">
-  <div class="final-word">💚 B - Baddy</div>
-  <div class="message">
+  <input id="guessInput" type="text" maxlength="5" placeholder="Enter 5-letter word"/>
+  <br/>
+  <button onclick="submitGuess()">Submit</button>
+
+  <div id="reveal" class="reveal" style="display:none;">
+    <h2 class="highlight">💚 B – Baddy</h2>
     <p>Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸</p>
     <p>As much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at: being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.</p>
     <p>As we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.</p>
     <p>💛 And I can’t wait to scream-hug you when I see you.</p>
-    <p><em>See you tomorrow, dumdum 💌</em></p>
+    <p class="note">See you tomorrow, dumdum 💌</p>
+    <img src="baddy.png" alt="Day 1 Ghibli">
   </div>
-  <img src="baddy.png" alt="Baddy Ghibli"/>
-</div>
 
-<script>
-  const answer = "BADDY";
-  let currentRow = 0;
+  <script>
+    const solution = 'BADDY';
+    let attempts = [];
 
-  function createTileRow(guess = "") {
-    const grid = document.getElementById("grid");
-    for (let i = 0; i < 5; i++) {
-      const tile = document.createElement("div");
-      tile.className = "tile";
-      tile.textContent = guess[i] || "";
-      grid.appendChild(tile);
-    }
-  }
+    function submitGuess() {
+      const input = document.getElementById('guessInput');
+      const guess = input.value.toUpperCase();
 
-  createTileRow();
+      if (guess.length !== 5) return;
 
-  function submitGuess() {
-    const guessInput = document.getElementById("guess");
-    const guess = guessInput.value.toUpperCase();
+      attempts.push(guess);
+      renderGrid();
 
-    if (guess.length !== 5) return;
+      input.value = '';
 
-    const tiles = Array.from(document.getElementsByClassName("tile")).slice(currentRow * 5, (currentRow + 1) * 5);
-    for (let i = 0; i < 5; i++) {
-      tiles[i].textContent = guess[i];
-      if (guess[i] === answer[i]) {
-        tiles[i].classList.add("correct");
-      } else if (answer.includes(guess[i])) {
-        tiles[i].classList.add("present");
-      } else {
-        tiles[i].classList.add("absent");
+      if (guess === solution) {
+        document.body.style.backgroundColor = '#4b2c20';
+        setTimeout(() => {
+          document.getElementById('reveal').style.display = 'block';
+        }, 300);
+      }
+
+      if (attempts.length >= 6) {
+        input.disabled = true;
       }
     }
 
-    if (guess === answer) {
-      document.body.style.backgroundColor = "#451a03";
-      document.getElementById("reveal").classList.add("show");
-    } else {
-      currentRow++;
-      if (currentRow < 6) createTileRow();
+    function renderGrid() {
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+
+      for (let word of attempts) {
+        for (let i = 0; i < 5; i++) {
+          const tile = document.createElement('div');
+          tile.classList.add('tile');
+          tile.textContent = word[i];
+
+          if (word[i] === solution[i]) {
+            tile.classList.add('correct');
+          } else if (solution.includes(word[i])) {
+            tile.classList.add('present');
+          } else {
+            tile.classList.add('absent');
+          }
+
+          grid.appendChild(tile);
+        }
+      }
+
+      // Render empty rows
+      const remainingRows = 6 - attempts.length;
+      for (let i = 0; i < remainingRows; i++) {
+        for (let j = 0; j < 5; j++) {
+          const tile = document.createElement('div');
+          tile.classList.add('tile');
+          grid.appendChild(tile);
+        }
+      }
     }
-
-    guessInput.value = "";
-  }
-</script>
-
+  </script>
 </body>
 </html>

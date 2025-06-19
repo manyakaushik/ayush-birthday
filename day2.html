@@ -1,140 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Wordle Countdown – Day 2</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day 2: Wordle Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #0d0d0d;
-      color: #f4e8c1;
-      font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      background-color: #000;
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .container {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 0 20px;
-      text-align: center;
+
+    h2 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-top: 30px;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      color: #f4e8c1;
-    }
-    .grid {
+
+    .board {
       display: grid;
-      grid-template-columns: repeat(7, 50px);
-      gap: 10px;
+      grid-template-columns: repeat(6, 60px);
+      grid-template-rows: repeat(6, 60px);
+      gap: 8px;
       justify-content: center;
-      margin: 30px 0;
+      margin: 20px 0;
     }
+
     .tile {
-      width: 50px;
-      height: 50px;
-      border: 2px solid #888;
-      font-size: 1.6em;
-      line-height: 50px;
+      width: 60px;
+      height: 60px;
+      border: 2px solid #444;
+      font-size: 28px;
+      font-weight: bold;
       text-transform: uppercase;
-      background-color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #1e1e1e;
       color: #fff;
-      transition: all 0.3s ease;
     }
-    .correct {
-      background-color: #538d4e;
+
+    .tile.correct {
+      background-color: #6aaa64;
+      border-color: #6aaa64;
     }
-    .close {
-      background-color: #b59f3b;
+
+    .tile.present {
+      background-color: #c9b458;
+      border-color: #c9b458;
     }
-    .wrong {
+
+    .tile.absent {
       background-color: #3a3a3c;
+      border-color: #3a3a3c;
     }
-    input {
-      font-size: 1.2em;
-      padding: 10px;
-      margin-top: 20px;
-      background: #1a1a1a;
-      color: white;
-      border: 1px solid #777;
+
+    .input-section {
+      margin: 20px 0;
     }
-    .message {
-      margin-top: 40px;
+
+    #guess-input {
+      font-size: 18px;
+      padding: 8px 12px;
+      width: 220px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 8px 14px;
+      background-color: #ffcc00;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .reveal-section {
+      display: none;
+      max-width: 600px;
       padding: 20px;
-      font-size: 1.1em;
-      background-color: rgba(255,255,255,0.05);
-      border: 1px solid #f4e8c1;
-      display: none;
-      animation: fadeIn 2s ease forwards;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out forwards;
     }
-    .image {
+
+    .reveal-section.show {
+      display: block;
+    }
+
+    .reveal-section img {
+      max-width: 100%;
       margin-top: 20px;
-      display: none;
-      animation: fadeIn 2s ease forwards;
+      border-radius: 10px;
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Day 2: Guess the Word</h1>
-    <div class="grid" id="grid"></div>
-    <input type="text" id="guessInput" maxlength="7" placeholder="7-letter word">
-    <br><br>
+  <h2>Day 2: Wordle Countdown</h2>
+  <div id="board" class="board"></div>
+
+  <div class="input-section">
+    <input type="text" id="guess-input" maxlength="6" placeholder="Enter 6-letter word" />
     <button onclick="submitGuess()">Submit</button>
-    <div class="message" id="messageBox">
-      <p>“From bunk beds to better halves — you’ve been my favorite stay 💌<br><br>
-      Cannot be more grateful for Zostels existing.<br><br>
-      Finding him has been the greatest coincidence of my life.<br><br>
-      The space we shared there was wholesome, safe, felt like home — and that is the easiest thing he does.<br><br>
-      He brings in so much wholesomeness that everyone is drawn to him.<br><br>
-      I was lucky I caught his attention, will always be proud I pulled a king.”</p>
-      <p style="margin-top:20px; font-style:italic;">💛 See you tomorrow, dumdum.</p>
-    </div>
-    <div class="image" id="imgBox">
-      <img src="ZOSTEL.png" alt="Zostel Ghibli" width="100%">
-    </div>
+  </div>
+
+  <div id="reveal" class="reveal-section">
+    <h3 style="color:#00ff99;">💚 E - Zostel</h3>
+    <p>From bunk beds to better halves — you’ve been my favorite stay. 💌</p>
+    <p>I can’t be more grateful that Zostels exist. Finding you was the greatest coincidence of my life. The space we shared felt wholesome, safe, like home — and that’s what you do so easily: make the world feel better just by being in it.</p>
+    <p>I was lucky you noticed me. I’ll always be proud that I pulled a king.</p>
+    <p style="color:#ffcc00;">🏕️ We checked in together. We’re not checking out.</p>
+    <p><em style="color:#ffcc99;">See you tomorrow, dumdum 💌</em></p>
+    <img src="zostel.png" alt="Zostel Art">
   </div>
 
   <script>
-    const correctWord = "ZOSTEL";
-    let row = 0;
-    const maxGuesses = 6;
+    const solution = "zostel";
+    let currentRow = 0;
+    let board = [];
 
-    function submitGuess() {
-      const guess = document.getElementById("guessInput").value.toUpperCase();
-      if (guess.length !== 7) {
-        alert("Enter a 7-letter word.");
-        return;
-      }
-      if (row >= maxGuesses) return;
-
-      const grid = document.getElementById("grid");
-      for (let i = 0; i < 7; i++) {
+    function createBoard() {
+      const boardEl = document.getElementById("board");
+      for (let i = 0; i < 36; i++) {
         const tile = document.createElement("div");
-        tile.className = "tile";
-        tile.textContent = guess[i];
-        if (guess[i] === correctWord[i]) {
-          tile.classList.add("correct");
-        } else if (correctWord.includes(guess[i])) {
-          tile.classList.add("close");
-        } else {
-          tile.classList.add("wrong");
-        }
-        grid.appendChild(tile);
-      }
-
-      row++;
-      document.getElementById("guessInput").value = "";
-
-      if (guess === correctWord) {
-        document.getElementById("messageBox").style.display = "block";
-        document.getElementById("imgBox").style.display = "block";
+        tile.classList.add("tile");
+        boardEl.appendChild(tile);
+        board.push(tile);
       }
     }
+
+    function submitGuess() {
+      const input = document.getElementById("guess-input");
+      const guess = input.value.toLowerCase();
+      if (guess.length !== 6) return alert("Please enter a 6-letter word");
+
+      for (let i = 0; i < 6; i++) {
+        const tile = board[currentRow * 6 + i];
+        tile.textContent = guess[i].toUpperCase();
+        if (guess[i] === solution[i]) {
+          tile.classList.add("correct");
+        } else if (solution.includes(guess[i])) {
+          tile.classList.add("present");
+        } else {
+          tile.classList.add("absent");
+        }
+      }
+
+      if (guess === solution) {
+        document.body.style.backgroundColor = "#4d1f1f";
+        document.getElementById("reveal").classList.add("show");
+      }
+
+      currentRow++;
+      document.getElementById("guess-input").value = "";
+    }
+
+    window.onload = createBoard;
   </script>
 </body>
 </html>

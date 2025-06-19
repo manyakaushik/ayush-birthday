@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wordle Countdown – Day 2</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #f4e8c1;
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #f4e8c1;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(7, 50px);
+      gap: 10px;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    .tile {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #888;
+      font-size: 1.6em;
+      line-height: 50px;
+      text-transform: uppercase;
+      background-color: #111;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+    .correct {
+      background-color: #538d4e;
+    }
+    .close {
+      background-color: #b59f3b;
+    }
+    .wrong {
+      background-color: #3a3a3c;
+    }
+    input {
+      font-size: 1.2em;
+      padding: 10px;
+      margin-top: 20px;
+      background: #1a1a1a;
+      color: white;
+      border: 1px solid #777;
+    }
+    .message {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 1.1em;
+      background-color: rgba(255,255,255,0.05);
+      border: 1px solid #f4e8c1;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+    .image {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Day 2: Guess the Word</h1>
+    <div class="grid" id="grid"></div>
+    <input type="text" id="guessInput" maxlength="7" placeholder="7-letter word">
+    <br><br>
+    <button onclick="submitGuess()">Submit</button>
+    <div class="message" id="messageBox">
+      <p>“From bunk beds to better halves — you’ve been my favorite stay 💌<br><br>
+      Cannot be more grateful for Zostels existing.<br><br>
+      Finding him has been the greatest coincidence of my life.<br><br>
+      The space we shared there was wholesome, safe, felt like home — and that is the easiest thing he does.<br><br>
+      He brings in so much wholesomeness that everyone is drawn to him.<br><br>
+      I was lucky I caught his attention, will always be proud I pulled a king.”</p>
+      <p style="margin-top:20px; font-style:italic;">💛 See you tomorrow, dumdum.</p>
+    </div>
+    <div class="image" id="imgBox">
+      <img src="ZOSTEL.png" alt="Zostel Ghibli" width="100%">
+    </div>
+  </div>
+
+  <script>
+    const correctWord = "ZOSTEL";
+    let row = 0;
+    const maxGuesses = 6;
+
+    function submitGuess() {
+      const guess = document.getElementById("guessInput").value.toUpperCase();
+      if (guess.length !== 7) {
+        alert("Enter a 7-letter word.");
+        return;
+      }
+      if (row >= maxGuesses) return;
+
+      const grid = document.getElementById("grid");
+      for (let i = 0; i < 7; i++) {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        tile.textContent = guess[i];
+        if (guess[i] === correctWord[i]) {
+          tile.classList.add("correct");
+        } else if (correctWord.includes(guess[i])) {
+          tile.classList.add("close");
+        } else {
+          tile.classList.add("wrong");
+        }
+        grid.appendChild(tile);
+      }
+
+      row++;
+      document.getElementById("guessInput").value = "";
+
+      if (guess === correctWord) {
+        document.getElementById("messageBox").style.display = "block";
+        document.getElementById("imgBox").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

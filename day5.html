@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Day 5: Wordle Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #f5f5f5;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-top: 30px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(7, 60px);
+      grid-template-rows: repeat(6, 60px);
+      gap: 8px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .tile {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #444;
+      font-size: 28px;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    .tile.correct {
+      background-color: #6aaa64;
+      border-color: #6aaa64;
+    }
+
+    .tile.present {
+      background-color: #c9b458;
+      border-color: #c9b458;
+    }
+
+    .tile.absent {
+      background-color: #3a3a3c;
+      border-color: #3a3a3c;
+    }
+
+    .input-section {
+      margin: 20px 0;
+    }
+
+    #guess-input {
+      font-size: 18px;
+      padding: 8px 12px;
+      width: 250px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 8px 14px;
+      background-color: #ffcc00;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .reveal-section {
+      display: none;
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .reveal-section.show {
+      display: block;
+    }
+
+    .reveal-section img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <h2>Day 5: Wordle Countdown</h2>
+  <div id="board" class="board"></div>
+
+  <div class="input-section">
+    <input type="text" id="guess-input" maxlength="7" placeholder="Enter 7-letter word" />
+    <button onclick="submitGuess()">Submit</button>
+  </div>
+
+  <div id="reveal" class="reveal-section">
+    <h3 style="color:#00ff99;">💚 N - Jamming</h3>
+    <p>God really heard me when I said I need a partner for everything.</p>
+    <p>He gave me someone to sing with. Listening to you sing is better than singing myself. You’re so effortless — your voice has all my respect.</p>
+    <p>That voice with that face and that soul? Honestly, I want to hide you from the world.</p>
+    <p style="color:#ffcc00;">🎶 Still mad I didn’t get that talent gene. Still grateful I got you.</p>
+    <p><em style="color:#ffcc99;">See you tomorrow, dumdum 💌</em></p>
+    <img src="jamming.png" alt="Jamming Art">
+  </div>
+
+  <script>
+    const solution = "jamming";
+    let currentRow = 0;
+    let board = [];
+
+    function createBoard() {
+      const boardEl = document.getElementById("board");
+      for (let i = 0; i < 42; i++) {
+        const tile = document.createElement("div");
+        tile.classList.add("tile");
+        boardEl.appendChild(tile);
+        board.push(tile);
+      }
+    }
+
+    function submitGuess() {
+      const input = document.getElementById("guess-input");
+      const guess = input.value.toLowerCase();
+      if (guess.length !== 7) return alert("Please enter a 7-letter word");
+
+      for (let i = 0; i < 7; i++) {
+        const tile = board[currentRow * 7 + i];
+        tile.textContent = guess[i].toUpperCase();
+        if (guess[i] === solution[i]) {
+          tile.classList.add("correct");
+        } else if (solution.includes(guess[i])) {
+          tile.classList.add("present");
+        } else {
+          tile.classList.add("absent");
+        }
+      }
+
+      if (guess === solution) {
+        document.body.style.backgroundColor = "#4d1f1f";
+        document.getElementById("reveal").classList.add("show");
+      }
+
+      currentRow++;
+      document.getElementById("guess-input").value = "";
+    }
+
+    window.onload = createBoard;
+  </script>
+</body>
+</html>

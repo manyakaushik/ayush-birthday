@@ -25,7 +25,7 @@
 
     .board {
       display: grid;
-      grid-template-columns: repeat(5, 60px);
+      grid-template-columns: repeat(8, 60px);
       grid-template-rows: repeat(6, 60px);
       gap: 8px;
       justify-content: center;
@@ -68,7 +68,7 @@
     #guess-input {
       font-size: 18px;
       padding: 8px 12px;
-      width: 220px;
+      width: 260px;
       border-radius: 5px;
       border: none;
     }
@@ -113,7 +113,7 @@
   <div id="board" class="board"></div>
 
   <div class="input-section">
-    <input type="text" id="guess-input" maxlength="5" placeholder="Enter 5-letter word" />
+    <input type="text" id="guess-input" maxlength="8" placeholder="Enter 8-letter word" />
     <button onclick="submitGuess()">Submit</button>
   </div>
 
@@ -128,13 +128,13 @@
   </div>
 
   <script>
-    const solution = "smile";
+    const solution = "facetime";
     let currentRow = 0;
     let board = [];
 
     function createBoard() {
       const boardEl = document.getElementById("board");
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 48; i++) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
         boardEl.appendChild(tile);
@@ -145,10 +145,10 @@
     function submitGuess() {
       const input = document.getElementById("guess-input");
       const guess = input.value.toLowerCase();
-      if (guess.length !== 5) return alert("Please enter a 5-letter word");
+      if (guess.length !== 8) return alert("Please enter an 8-letter word");
 
-      for (let i = 0; i < 5; i++) {
-        const tile = board[currentRow * 5 + i];
+      for (let i = 0; i < 8; i++) {
+        const tile = board[currentRow * 8 + i];
         tile.textContent = guess[i].toUpperCase();
         if (guess[i] === solution[i]) {
           tile.classList.add("correct");

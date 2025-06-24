@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Day 7: Wordle Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Day 10: Wordle Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background-color: #000;
-      color: #f5f5f5;
+      background-color: #fff8e1;
+      color: #222;
       font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
+      overflow-x: hidden;
     }
 
     h2 {
-      font-size: 32px;
-      color: #ffcc00;
+      font-size: 36px;
+      color: #fbc02d;
       margin-top: 30px;
     }
 
     .board {
       display: grid;
-      grid-template-columns: repeat(7, 60px);
+      grid-template-columns: repeat(6, 60px);
       grid-template-rows: repeat(6, 60px);
       gap: 8px;
       justify-content: center;
@@ -35,7 +37,7 @@
     .tile {
       width: 60px;
       height: 60px;
-      border: 2px solid #444;
+      border: 2px solid #888;
       font-size: 28px;
       font-weight: bold;
       text-transform: uppercase;
@@ -50,12 +52,10 @@
       background-color: #6aaa64;
       border-color: #6aaa64;
     }
-
     .tile.present {
       background-color: #c9b458;
       border-color: #c9b458;
     }
-
     .tile.absent {
       background-color: #3a3a3c;
       border-color: #3a3a3c;
@@ -70,13 +70,13 @@
       padding: 8px 12px;
       width: 250px;
       border-radius: 5px;
-      border: none;
+      border: 1px solid #ccc;
     }
 
     button {
       margin-left: 10px;
       padding: 8px 14px;
-      background-color: #ffcc00;
+      background-color: #fbc02d;
       border: none;
       font-weight: bold;
       font-size: 16px;
@@ -86,9 +86,8 @@
 
     .reveal-section {
       display: none;
-      max-width: 600px;
+      max-width: 90vw;
       padding: 20px;
-      text-align: center;
       animation: fadeIn 2s ease-in-out forwards;
     }
 
@@ -96,46 +95,116 @@
       display: block;
     }
 
-    .reveal-section img {
-      max-width: 100%;
-      margin-top: 20px;
-      border-radius: 10px;
+    .reveal-section img.main {
+      width: 60%;
+      border-radius: 12px;
+      margin: 30px auto;
+    }
+
+    .all-images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-container img {
+      width: 100px;
+      border-radius: 8px;
+    }
+
+    .image-label {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .highlight {
+      color: #fbc02d;
+      font-weight: bold;
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .birthday {
+      font-size: 32px;
+      color: #fbc02d;
+      font-weight: bold;
+      margin-top: 40px;
+      animation: glow 2s infinite alternate;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fbc02d; }
+      to { text-shadow: 0 0 20px #fdd835; }
     }
   </style>
 </head>
 <body>
-  <h2>Day 7: Wordle Countdown</h2>
+  <h2>Day 10: Wordle Countdown</h2>
   <div id="board" class="board"></div>
 
   <div class="input-section">
-    <input type="text" id="guess-input" maxlength="7" placeholder="Enter 7-letter word" />
+    <input type="text" id="guess-input" maxlength="6" placeholder="Enter 6-letter word" />
     <button onclick="submitGuess()">Submit</button>
   </div>
 
   <div id="reveal" class="reveal-section">
-    <h3 style="color:#00ff99;">💚 B - Biscoff</h3>
-    <p>We couldn’t skip food. Especially Biscoff. 😋</p>
-    <p>Maybe we both love it so much because it’s unique. Just like us. If people were dessert flavors, we’d both be Biscoff — rich, layered, and addictive.</p>
-    <p>You? You’d be a cheesecake — soft-hearted and dangerously cheesy with your words.</p>
-    <p>My baby. My sweet tooth. My home snack.</p>
-    <p style="color:#ffcc00;">🍰 Warning: Snuggle cravings may spike after reading this.</p>
-    <p><em style="color:#ffcc99;">See you tomorrow, dumdum 💌</em></p>
-    <img src="biscoff.png" alt="Biscoff Art">
+    <h3 class="highlight">💛 Y – Yellow</h3>
+    <p>Yellow will always mean more now.<br>
+    I grew up loving it. But then I met you — at an artist’s concert where Yellow played.<br>
+    You argued about the jacket being yellow. The elephant I hug daily is yellow. My heart — glowing for you — is yellow.<br>
+    You make me feel safe, loved, golden.<br>
+    You are my sunshine. My home. My hero. My twin flame.</p>
+    <img src="yellow.png" alt="Yellow Art" class="main">
+    <p class="highlight">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
+
+    <div class="all-images">
+      <div class="image-container"><img src="baddy.png"><div class="image-label"><span class="highlight">B</span>addy</div></div>
+      <div class="image-container"><img src="zostel.png"><div class="image-label">Z<span class="highlight">E</span>ostel</div></div>
+      <div class="image-container"><img src="smile.png"><div class="image-label">S<span class="highlight">M</span>ile</div></div>
+      <div class="image-container"><img src="facetime.png"><div class="image-label">Facet<span class="highlight">I</span>me</div></div>
+      <div class="image-container"><img src="jamming.png"><div class="image-label">Ja<span class="highlight">M</span>ming</div></div>
+      <div class="image-container"><img src="trades.png"><div class="image-label">Trad<span class="highlight">E</span>s</div></div>
+      <div class="image-container"><img src="biscoff.png"><div class="image-label"><span class="highlight">B</span>iscoff</div></div>
+      <div class="image-container"><img src="taylor.png"><div class="image-label">T<span class="highlight">A</span>ylor</div></div>
+      <div class="image-container"><img src="bites.png"><div class="image-label"><span class="highlight">B</span>ites</div></div>
+      <div class="image-container"><img src="yellow.png"><div class="image-label"><span class="highlight">Y</span>ellow</div></div>
+    </div>
+
+    <div class="birthday">🎉 HAPPY BIRTHDAY DUMDUM 🎉</div>
+    <div style="font-size: 24px; margin-top: 10px; color:#fbc02d">✨ BE MINE BABY ✨</div>
   </div>
 
+  <canvas class="confetti" id="confetti"></canvas>
+
   <script>
-    const solution = "biscoff";
+    const solution = "yellow";
     let currentRow = 0;
     let board = [];
 
     function createBoard() {
       const boardEl = document.getElementById("board");
-      for (let i = 0; i < 42; i++) {
+      for (let i = 0; i < 36; i++) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
         boardEl.appendChild(tile);
@@ -146,10 +215,10 @@
     function submitGuess() {
       const input = document.getElementById("guess-input");
       const guess = input.value.toLowerCase();
-      if (guess.length !== 7) return alert("Please enter a 7-letter word");
+      if (guess.length !== 6) return alert("Please enter a 6-letter word");
 
-      for (let i = 0; i < 7; i++) {
-        const tile = board[currentRow * 7 + i];
+      for (let i = 0; i < 6; i++) {
+        const tile = board[currentRow * 6 + i];
         tile.textContent = guess[i].toUpperCase();
         if (guess[i] === solution[i]) {
           tile.classList.add("correct");
@@ -161,12 +230,40 @@
       }
 
       if (guess === solution) {
-        document.body.style.backgroundColor = "#4d1f1f";
         document.getElementById("reveal").classList.add("show");
+        launchConfetti();
       }
 
       currentRow++;
-      document.getElementById("guess-input").value = "";
+      input.value = "";
+    }
+
+    function launchConfetti() {
+      const confetti = document.getElementById("confetti");
+      const ctx = confetti.getContext("2d");
+      confetti.width = window.innerWidth;
+      confetti.height = window.innerHeight;
+      let particles = Array.from({ length: 200 }, () => ({
+        x: Math.random() * confetti.width,
+        y: Math.random() * confetti.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 10 + 5,
+        color: `hsl(${Math.random() * 60 + 40}, 100%, 50%)`
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, confetti.width, confetti.height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.y += p.d * 0.2;
+          if (p.y > confetti.height) p.y = -10;
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
     }
 
     window.onload = createBoard;

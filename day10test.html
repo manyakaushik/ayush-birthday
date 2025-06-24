@@ -2,194 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Day 10: Wordle Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --dark-maroon: #1c0f0a;
+      --gold: #ffcc00;
+    }
     body {
       margin: 0;
-      padding: 0;
-      background-color: #fff8e1;
-      color: #333;
       font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
+      background-color: black;
+      color: white;
+      transition: background-color 2s ease;
     }
-
-    h2 {
-      text-align: center;
-      font-size: 32px;
-      color: #ffcc00;
-      margin: 20px 0;
-    }
-
     .board {
       display: grid;
       grid-template-columns: repeat(6, 60px);
-      grid-template-rows: repeat(6, 60px);
-      gap: 8px;
+      grid-gap: 6px;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-top: 30px;
     }
-
     .tile {
       width: 60px;
       height: 60px;
-      border: 2px solid #444;
+      background-color: #222;
+      color: white;
       font-size: 28px;
       font-weight: bold;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #1e1e1e;
-      color: #fff;
-    }
-
-    .tile.correct {
-      background-color: #6aaa64;
-      border-color: #6aaa64;
-    }
-
-    .tile.present {
-      background-color: #c9b458;
-      border-color: #c9b458;
-    }
-
-    .tile.absent {
-      background-color: #3a3a3c;
-      border-color: #3a3a3c;
-    }
-
-    .input-section {
       text-align: center;
-      margin-bottom: 30px;
+      line-height: 60px;
+      border-radius: 5px;
     }
+    .correct { background-color: #6aaa64; }
+    .present { background-color: #c9b458; }
+    .absent { background-color: #3a3a3c; }
 
     #guess-input {
+      margin-top: 20px;
+      padding: 10px;
       font-size: 18px;
-      padding: 8px 12px;
-      width: 200px;
       border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin-left: 10px;
-      padding: 8px 14px;
-      background-color: #ffcc00;
       border: none;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
+      width: 240px;
     }
-
-    .reveal-section {
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      background-color: var(--gold);
+      color: #000;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .reveal {
       display: none;
+      background-color: var(--dark-maroon);
       padding: 20px;
       text-align: center;
-      animation: fadeIn 2s ease-in-out forwards;
+      color: var(--gold);
+    }
+    .reveal img.hero {
+      max-width: 300px;
+      margin: 20px 0;
+      border-radius: 12px;
     }
 
-    .reveal-section.show {
+    .strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .day-item {
+      margin: 10px;
+      position: relative;
+    }
+    .day-item img {
+      max-height: 150px;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .day-item:hover img {
+      transform: scale(1.08);
+    }
+    .popup {
+      display: none;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      width: 280px;
+      padding: 12px;
+      border-radius: 10px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+    .day-item:hover .popup {
       display: block;
     }
-
-    .reveal-image {
-      width: 80%;
-      max-width: 500px;
-      border-radius: 10px;
-      margin: 30px auto;
-    }
-
-    .gold { color: #ffcc00; }
-
-    .image-strip {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 16px;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .image-item {
-      flex: 0 0 auto;
-      width: 120px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .image-item:hover {
-      transform: scale(1.2);
-    }
-
-    .letter {
+    .final-msg {
+      font-size: 22px;
       text-align: center;
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .final-message {
-      text-align: center;
-      font-size: 28px;
+      margin: 30px 0;
+      color: var(--gold);
       font-weight: bold;
-      color: #ffcc00;
-      margin-top: 40px;
-      animation: fadeIn 2s ease-in-out;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .sentence-line {
+      text-align: center;
+      font-size: 24px;
+      color: var(--gold);
     }
-
-    #confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
+    .glow {
+      font-size: 40px;
+      color: var(--gold);
+      text-align: center;
+      margin-top: 20px;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 0 0 20px #ffd700; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #ffa500, 0 0 30px #ffd700; }
     }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
-  <h2>Day 10: Wordle Countdown</h2>
-
-  <div id="board" class="board"></div>
-  <div class="input-section">
+  <div style="text-align:center">
+    <h2 style="color:var(--gold)">Day 10: Wordle Countdown</h2>
+    <div class="board" id="board"></div>
     <input type="text" id="guess-input" maxlength="6" placeholder="Enter 6-letter word" />
     <button onclick="submitGuess()">Submit</button>
   </div>
 
-  <div id="reveal" class="reveal-section">
-    <h3 class="gold">💛 Y – Yellow</h3>
-    <p>Yellow will always mean more now.<br>
-      I grew up loving it. But then I met you — at an artist’s concert where Yellow played.<br>
-      You argued about the jacket being yellow. The elephant I hug daily is yellow. My heart — glowing for you — is yellow.<br>
-      You make me feel safe, loved, golden.<br>
-      You are my sunshine. My home. My hero. My twin flame.</p>
-    <p class="gold">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
-    <img src="yellow.png" alt="Yellow Hug" class="reveal-image">
+  <div class="reveal" id="reveal">
+    <h3>💛 Y – Yellow</h3>
+    <p>Yellow will always mean more now. I grew up loving it. But then I met you — at an artist’s concert where Yellow played.</p>
+    <p>You argued about the jacket being yellow. The elephant I hug daily is yellow. My heart — glowing for you — is yellow.</p>
+    <p>You make me feel safe, loved, golden. You are my sunshine. My home. My hero. My twin flame.</p>
+    <img src="yellow.png" alt="Yellow Art" class="hero">
+    <p style="color: var(--gold); font-weight: bold">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
 
-    <div class="image-strip">
-      <!-- Each image with letter + word below -->
-      <div class="image-item"><img src="baddy.png" width="100%"><div class="letter gold">B – Baddy</div></div>
-      <div class="image-item"><img src="zostel.png" width="100%"><div class="letter gold">E – Zostel</div></div>
-      <div class="image-item"><img src="smile.png" width="100%"><div class="letter gold">M – Smile</div></div>
-      <div class="image-item"><img src="facetime.png" width="100%"><div class="letter gold">I – Facetime</div></div>
-      <div class="image-item"><img src="jamming.png" width="100%"><div class="letter gold">N – Jamming</div></div>
-      <div class="image-item"><img src="trades.png" width="100%"><div class="letter gold">E – Trades</div></div>
-      <div class="image-item"><img src="biscoff.png" width="100%"><div class="letter gold">B – Biscoff</div></div>
-      <div class="image-item"><img src="taylor.png" width="100%"><div class="letter gold">A – Taylor</div></div>
-      <div class="image-item"><img src="bites.png" width="100%"><div class="letter gold">B – Bites</div></div>
-      <div class="image-item"><img src="yellow.png" width="100%"><div class="letter gold">Y – Yellow</div></div>
+    <div class="strip">
+      <!-- REPEAT THIS BLOCK FOR EACH IMAGE-->
+      <div class="day-item">
+        <img src="baddy.png" alt="Baddy">
+        <div class="popup">Your smashes on court? Sexy... And I can’t wait to scream-hug you when I see you.</div>
+        <p><strong style="color:var(--gold)">B</strong><br/>Baddy</p>
+      </div>
+      <!-- More items like above: zostel.png, smile.png... -->
     </div>
 
-    <div class="final-message">✨ BE MINE BABY ✨<br>🎉 HAPPY BIRTHDAY DUMDUM 🎉</div>
+    <div class="sentence-line">✨ B E ✨</div>
+    <div class="sentence-line">✨ M I N E ✨</div>
+    <div class="sentence-line">✨ B A B Y ✨</div>
+
+    <div class="glow">🎉 HAPPY BIRTHDAY DUMDUM 🎉</div>
   </div>
 
   <script>
@@ -199,57 +170,12 @@
 
     function createBoard() {
       const boardEl = document.getElementById("board");
-      for (let i = 0; i < 36; i++) {
+      for (let i = 0; i < 6 * 6; i++) {
         const tile = document.createElement("div");
         tile.classList.add("tile");
         boardEl.appendChild(tile);
         board.push(tile);
       }
-    }
-
-    function launchConfetti() {
-      const confetti = document.getElementById("confetti");
-      const ctx = confetti.getContext("2d");
-      confetti.width = window.innerWidth;
-      confetti.height = window.innerHeight;
-      const particles = Array.from({length: 100}, () => ({
-        x: Math.random() * confetti.width,
-        y: Math.random() * confetti.height,
-        r: Math.random() * 6 + 4,
-        d: Math.random() * 40 + 10,
-        color: "#ffd700",
-        tilt: Math.floor(Math.random() * 10) - 10
-      }));
-
-      function draw() {
-        ctx.clearRect(0, 0, confetti.width, confetti.height);
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.fillStyle = p.color;
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-        });
-        update();
-      }
-
-      function update() {
-        particles.forEach(p => {
-          p.y += Math.cos(p.d) + 1 + p.r / 2;
-          p.x += Math.sin(0);
-
-          if (p.y > confetti.height) {
-            p.x = Math.random() * confetti.width;
-            p.y = -10;
-          }
-        });
-      }
-
-      function loop() {
-        draw();
-        requestAnimationFrame(loop);
-      }
-
-      loop();
     }
 
     function submitGuess() {
@@ -270,12 +196,12 @@
       }
 
       if (guess === solution) {
-        document.getElementById("reveal").classList.add("show");
-        launchConfetti();
+        document.body.style.backgroundColor = "#1c0f0a";
+        document.getElementById("reveal").style.display = "block";
       }
 
       currentRow++;
-      document.getElementById("guess-input").value = "";
+      input.value = "";
     }
 
     window.onload = createBoard;

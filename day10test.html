@@ -63,6 +63,11 @@
       padding: 20px;
       text-align: center;
       color: var(--gold);
+      animation: fadeIn 2s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .reveal img.hero {
       max-width: 300px;
@@ -91,16 +96,18 @@
       left: 0;
       height: 100vh;
       width: 100vw;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
     .popup-content {
       background: #111;
-      padding: 20px;
+      padding: 30px;
       border-radius: 12px;
       max-width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
       text-align: center;
       color: white;
     }
@@ -109,16 +116,18 @@
       border-radius: 12px;
     }
     .popup-content p {
-      margin-top: 10px;
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 1.6;
     }
     .popup-overlay.show {
       display: flex;
     }
     .glow {
-      font-size: 60px;
+      font-size: 70px;
       color: var(--gold);
       text-align: center;
-      margin-top: 40px;
+      margin-top: 50px;
       animation: shimmer 2s infinite;
     }
     @keyframes shimmer {
@@ -144,38 +153,38 @@
     <p style="color: var(--gold); font-weight: bold">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
 
     <div class="strip-row">
-      <div class="day-item" onclick="showPopup('baddy.png', 'Your smashes on court? Sexy... And I can’t wait to scream-hug you when I see you.')">
+      <div class="day-item" onclick="showPopup('baddy.png', `Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸\nAs much as you think I’d never beat you at sports, there are far more things I know I’ll never beat you at: being everyone’s favorite, operating so selflessly and lovingly, finishing the bowl of everything on the table.\nAs we count down to your birthday, I want you to remind yourself each day how fab you are. How perfect. How deeply, crazily loved.\n💛 And I can’t wait to scream-hug you when I see you.`)">
         <img src="baddy.png"><p><strong>B</strong><br>Baddy</p>
       </div>
-      <div class="day-item" onclick="showPopup('zostel.png', 'That evening at Zostel? Felt like we paused time.')">
+      <div class="day-item" onclick="showPopup('zostel.png', `From bunk beds to better halves — you’ve been my favorite stay. 💌\nI can’t be more grateful that Zostels exist. Finding you was the greatest coincidence of my life.\n🏕️ We checked in together. We’re not checking out.`)">
         <img src="zostel.png"><p><strong>E</strong><br>Zostel</p>
       </div>
     </div>
     <div class="strip-row">
-      <div class="day-item" onclick="showPopup('smile.png', 'Your smile was the first thing I noticed — and the hardest thing I ever fell for.')">
+      <div class="day-item" onclick="showPopup('smile.png', `Your smile was the first thing I noticed — and the hardest thing I ever fell for.\n😊 Seriously. Flash it again and I might combust.`)">
         <img src="smile.png"><p><strong>M</strong><br>Smile</p>
       </div>
-      <div class="day-item" onclick="showPopup('facetime.png', 'Every call ends with me wanting more of you.')">
+      <div class="day-item" onclick="showPopup('facetime.png', `The calls. The silences. The sleepy eyes.\n📱 Thank god for FaceTime. And for your face.`)">
         <img src="facetime.png"><p><strong>I</strong><br>Facetime</p>
       </div>
-      <div class="day-item" onclick="showPopup('jamming.png', 'Your voice, my background score.')">
+      <div class="day-item" onclick="showPopup('jamming.png', `Listening to you sing is better than singing myself.\n🎶 Still mad I didn’t get that talent gene. Still grateful I got you.`)">
         <img src="jamming.png"><p><strong>N</strong><br>Jamming</p>
       </div>
-      <div class="day-item" onclick="showPopup('trades.png', 'All our inside jokes, our trades of love.')">
+      <div class="day-item" onclick="showPopup('trades.png', `You’re a beast at trading. But my favorite investment? Your heart. 💹\n📈 Long-term holding. No stop loss.`)">
         <img src="trades.png"><p><strong>E</strong><br>Trades</p>
       </div>
     </div>
     <div class="strip-row">
-      <div class="day-item" onclick="showPopup('biscoff.png', 'We couldn’t skip food...')">
+      <div class="day-item" onclick="showPopup('biscoff.png', `We couldn’t skip food. Especially Biscoff. 😋\n🍰 Warning: Snuggle cravings may spike after reading this.`)">
         <img src="biscoff.png"><p><strong>B</strong><br>Biscoff</p>
       </div>
-      <div class="day-item" onclick="showPopup('taylor.png', 'Listening to Taylor hits different with you.')">
+      <div class="day-item" onclick="showPopup('taylor.png', `Because every good-guy line? Feels like it was written about you.\n🎵 You are the best thing that’s ever been mine.`)">
         <img src="taylor.png"><p><strong>A</strong><br>Taylor</p>
       </div>
-      <div class="day-item" onclick="showPopup('bites.png', 'Every kiss tasted like forever.')">
+      <div class="day-item" onclick="showPopup('bites.png', `Biting is how I say \"mine\" without words.\n🍬 Prepare to be bitten. Again. And again.`)">
         <img src="bites.png"><p><strong>B</strong><br>Bites</p>
       </div>
-      <div class="day-item" onclick="showPopup('yellow.png', 'You are my forever sunset.')">
+      <div class="day-item" onclick="showPopup('yellow.png', `You make me feel safe, loved, golden.\n💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.`)">
         <img src="yellow.png"><p><strong>Y</strong><br>Yellow</p>
       </div>
     </div>

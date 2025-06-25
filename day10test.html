@@ -70,63 +70,60 @@
       margin: 20px 0;
       border-radius: 12px;
     }
-
     .strip {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       justify-content: center;
-      margin-top: 30px;
+      align-items: start;
+      margin: 30px 0;
     }
-    .day-item {
-      margin: 10px;
+    .strip .day-card {
       position: relative;
+      max-width: 180px;
+      margin: 0 auto;
     }
-    .day-item img {
-      max-height: 150px;
+    .strip .day-card img {
+      width: 100%;
       border-radius: 12px;
       transition: transform 0.3s;
     }
-    .day-item:hover img {
+    .strip .day-card:hover img {
       transform: scale(1.08);
     }
     .popup {
       display: none;
       position: absolute;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      width: 280px;
-      padding: 12px;
-      border-radius: 10px;
-      top: 100%;
+      bottom: 110%;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 5;
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      width: 280px;
+      text-align: left;
+      z-index: 10;
     }
-    .day-item:hover .popup {
+    .day-card:hover .popup {
       display: block;
     }
-    .final-msg {
-      font-size: 22px;
-      text-align: center;
-      margin: 30px 0;
-      color: var(--gold);
-      font-weight: bold;
-    }
-    .sentence-line {
-      text-align: center;
-      font-size: 24px;
-      color: var(--gold);
-    }
     .glow {
-      font-size: 40px;
+      font-size: 42px;
       color: var(--gold);
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
       animation: shimmer 2s infinite;
     }
     @keyframes shimmer {
       0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 0 0 20px #ffd700; }
       50% { text-shadow: 0 0 10px #fff, 0 0 20px #ffa500, 0 0 30px #ffd700; }
+    }
+    .sentence-line {
+      text-align: center;
+      font-size: 24px;
+      color: var(--gold);
+      margin: 6px 0;
     }
   </style>
 </head>
@@ -147,13 +144,16 @@
     <p style="color: var(--gold); font-weight: bold">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
 
     <div class="strip">
-      <!-- REPEAT THIS BLOCK FOR EACH IMAGE-->
-      <div class="day-item">
-        <img src="baddy.png" alt="Baddy">
-        <div class="popup">Your smashes on court? Sexy... And I can’t wait to scream-hug you when I see you.</div>
-        <p><strong style="color:var(--gold)">B</strong><br/>Baddy</p>
-      </div>
-      <!-- More items like above: zostel.png, smile.png... -->
+      <div class="day-card"><img src="baddy.png"><div class="popup">Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸...</div><p><strong>B</strong><br>Baddy</p></div>
+      <div class="day-card"><img src="zostel.png"><div class="popup">From bunk beds to better halves — you’ve been my favorite stay. 💌...</div><p><strong>E</strong><br>Zostel</p></div>
+      <div class="day-card"><img src="smile.png"><div class="popup">Your smile was the first thing I noticed — and the hardest thing I ever fell for...</div><p><strong>M</strong><br>Smile</p></div>
+      <div class="day-card"><img src="facetime.png"><div class="popup">The calls. The silences. The sleepy eyes. Being close to you — even through a screen...</div><p><strong>I</strong><br>Facetime</p></div>
+      <div class="day-card"><img src="jamming.png"><div class="popup">Listening to you sing is better than singing myself. You’re so effortless...</div><p><strong>N</strong><br>Jamming</p></div>
+      <div class="day-card"><img src="trades.png"><div class="popup">You’re a beast at trading. But my favorite investment? Your heart. 💹...</div><p><strong>E</strong><br>Trades</p></div>
+      <div class="day-card"><img src="biscoff.png"><div class="popup">We couldn’t skip food. Especially Biscoff. 😋...</div><p><strong>B</strong><br>Biscoff</p></div>
+      <div class="day-card"><img src="taylor.png"><div class="popup">Every good-guy line? Feels like it was written about you. Love is golden...</div><p><strong>A</strong><br>Taylor</p></div>
+      <div class="day-card"><img src="bites.png"><div class="popup">Biting is how I say "mine" without words. Prepare to be devoured...</div><p><strong>B</strong><br>Bites</p></div>
+      <div class="day-card"><img src="yellow.png"><div class="popup">Yellow will always mean more now. You are my sunshine, my home, my twin flame...</div><p><strong>Y</strong><br>Yellow</p></div>
     </div>
 
     <div class="sentence-line">✨ B E ✨</div>

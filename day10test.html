@@ -38,7 +38,6 @@
     .correct { background-color: #6aaa64; }
     .present { background-color: #c9b458; }
     .absent { background-color: #3a3a3c; }
-
     #guess-input {
       margin-top: 20px;
       padding: 10px;
@@ -70,60 +69,61 @@
       margin: 20px 0;
       border-radius: 12px;
     }
-    .strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+    .strip-row {
+      display: flex;
       justify-content: center;
-      align-items: start;
-      margin: 30px 0;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
     }
-    .strip .day-card {
-      position: relative;
-      max-width: 180px;
-      margin: 0 auto;
+    .day-item {
+      text-align: center;
+      cursor: pointer;
     }
-    .strip .day-card img {
-      width: 100%;
+    .day-item img {
+      max-height: 200px;
       border-radius: 12px;
-      transition: transform 0.3s;
     }
-    .strip .day-card:hover img {
-      transform: scale(1.08);
-    }
-    .popup {
+    .popup-overlay {
       display: none;
-      position: absolute;
-      bottom: 110%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 12px;
-      border-radius: 10px;
-      width: 280px;
-      text-align: left;
-      z-index: 10;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
-    .day-card:hover .popup {
-      display: block;
+    .popup-content {
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 90%;
+      text-align: center;
+      color: white;
+    }
+    .popup-content img {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    .popup-content p {
+      margin-top: 10px;
+    }
+    .popup-overlay.show {
+      display: flex;
     }
     .glow {
-      font-size: 42px;
+      font-size: 60px;
       color: var(--gold);
       text-align: center;
-      margin-top: 30px;
+      margin-top: 40px;
       animation: shimmer 2s infinite;
     }
     @keyframes shimmer {
       0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ffd700, 0 0 20px #ffd700; }
       50% { text-shadow: 0 0 10px #fff, 0 0 20px #ffa500, 0 0 30px #ffd700; }
-    }
-    .sentence-line {
-      text-align: center;
-      font-size: 24px;
-      color: var(--gold);
-      margin: 6px 0;
     }
   </style>
 </head>
@@ -143,24 +143,50 @@
     <img src="yellow.png" alt="Yellow Art" class="hero">
     <p style="color: var(--gold); font-weight: bold">💛 Thank you for making it all yellow. Happy Birthday, baby. I love you.</p>
 
-    <div class="strip">
-      <div class="day-card"><img src="baddy.png"><div class="popup">Your smashes on court? Sexy. But not as hard as I’ve fallen for you. 🏸...</div><p><strong>B</strong><br>Baddy</p></div>
-      <div class="day-card"><img src="zostel.png"><div class="popup">From bunk beds to better halves — you’ve been my favorite stay. 💌...</div><p><strong>E</strong><br>Zostel</p></div>
-      <div class="day-card"><img src="smile.png"><div class="popup">Your smile was the first thing I noticed — and the hardest thing I ever fell for...</div><p><strong>M</strong><br>Smile</p></div>
-      <div class="day-card"><img src="facetime.png"><div class="popup">The calls. The silences. The sleepy eyes. Being close to you — even through a screen...</div><p><strong>I</strong><br>Facetime</p></div>
-      <div class="day-card"><img src="jamming.png"><div class="popup">Listening to you sing is better than singing myself. You’re so effortless...</div><p><strong>N</strong><br>Jamming</p></div>
-      <div class="day-card"><img src="trades.png"><div class="popup">You’re a beast at trading. But my favorite investment? Your heart. 💹...</div><p><strong>E</strong><br>Trades</p></div>
-      <div class="day-card"><img src="biscoff.png"><div class="popup">We couldn’t skip food. Especially Biscoff. 😋...</div><p><strong>B</strong><br>Biscoff</p></div>
-      <div class="day-card"><img src="taylor.png"><div class="popup">Every good-guy line? Feels like it was written about you. Love is golden...</div><p><strong>A</strong><br>Taylor</p></div>
-      <div class="day-card"><img src="bites.png"><div class="popup">Biting is how I say "mine" without words. Prepare to be devoured...</div><p><strong>B</strong><br>Bites</p></div>
-      <div class="day-card"><img src="yellow.png"><div class="popup">Yellow will always mean more now. You are my sunshine, my home, my twin flame...</div><p><strong>Y</strong><br>Yellow</p></div>
+    <div class="strip-row">
+      <div class="day-item" onclick="showPopup('baddy.png', 'Your smashes on court? Sexy... And I can’t wait to scream-hug you when I see you.')">
+        <img src="baddy.png"><p><strong>B</strong><br>Baddy</p>
+      </div>
+      <div class="day-item" onclick="showPopup('zostel.png', 'That evening at Zostel? Felt like we paused time.')">
+        <img src="zostel.png"><p><strong>E</strong><br>Zostel</p>
+      </div>
     </div>
-
-    <div class="sentence-line">✨ B E ✨</div>
-    <div class="sentence-line">✨ M I N E ✨</div>
-    <div class="sentence-line">✨ B A B Y ✨</div>
-
+    <div class="strip-row">
+      <div class="day-item" onclick="showPopup('smile.png', 'Your smile was the first thing I noticed — and the hardest thing I ever fell for.')">
+        <img src="smile.png"><p><strong>M</strong><br>Smile</p>
+      </div>
+      <div class="day-item" onclick="showPopup('facetime.png', 'Every call ends with me wanting more of you.')">
+        <img src="facetime.png"><p><strong>I</strong><br>Facetime</p>
+      </div>
+      <div class="day-item" onclick="showPopup('jamming.png', 'Your voice, my background score.')">
+        <img src="jamming.png"><p><strong>N</strong><br>Jamming</p>
+      </div>
+      <div class="day-item" onclick="showPopup('trades.png', 'All our inside jokes, our trades of love.')">
+        <img src="trades.png"><p><strong>E</strong><br>Trades</p>
+      </div>
+    </div>
+    <div class="strip-row">
+      <div class="day-item" onclick="showPopup('biscoff.png', 'We couldn’t skip food...')">
+        <img src="biscoff.png"><p><strong>B</strong><br>Biscoff</p>
+      </div>
+      <div class="day-item" onclick="showPopup('taylor.png', 'Listening to Taylor hits different with you.')">
+        <img src="taylor.png"><p><strong>A</strong><br>Taylor</p>
+      </div>
+      <div class="day-item" onclick="showPopup('bites.png', 'Every kiss tasted like forever.')">
+        <img src="bites.png"><p><strong>B</strong><br>Bites</p>
+      </div>
+      <div class="day-item" onclick="showPopup('yellow.png', 'You are my forever sunset.')">
+        <img src="yellow.png"><p><strong>Y</strong><br>Yellow</p>
+      </div>
+    </div>
     <div class="glow">🎉 HAPPY BIRTHDAY DUMDUM 🎉</div>
+  </div>
+
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <img id="popup-img" src="" alt="Popup Image">
+      <p id="popup-msg"></p>
+    </div>
   </div>
 
   <script>
@@ -203,6 +229,16 @@
       currentRow++;
       input.value = "";
     }
+
+    function showPopup(imgSrc, msg) {
+      document.getElementById('popup-img').src = imgSrc;
+      document.getElementById('popup-msg').textContent = msg;
+      document.getElementById('popup').classList.add('show');
+    }
+
+    document.getElementById('popup').addEventListener('click', function () {
+      this.classList.remove('show');
+    });
 
     window.onload = createBoard;
   </script>
